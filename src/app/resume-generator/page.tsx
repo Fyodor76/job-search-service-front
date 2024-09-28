@@ -134,7 +134,7 @@ export default function ResumeGenerator() {
           />
         </div>
         <div className={styles.formGroup}>
-          <label className={styles.label}>Last Name:</label>
+          <label className={styles.label}>Last Name!!!!!:</label>
           <input
             type="text"
             name="lastName"
