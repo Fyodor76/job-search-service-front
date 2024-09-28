@@ -124,7 +124,7 @@ export default function ResumeGenerator() {
       <h1 className={styles.title}>Resume Generator</h1>
       <form className={styles.form}>
         <div className={styles.formGroup}>
-          <label className={styles.label}>First Name:</label>
+          <label className={styles.label}>First Name Test:</label>
           <input
             type="text"
             name="firstName"
