@@ -1,0 +1,39 @@
+.button {
+  border: none;
+  border-radius: 7px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  transition: opacity 0.4s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &--small {
+    width: 80px;
+    height: 32px;
+    font-size: 11px;
+  }
+
+  &--medium {
+    width: 111px;
+    height: 40px;
+    font-size: 11px;
+  }
+
+  &--large {
+    width: 140px;
+    height: 48px;
+    font-size: 11px;
+  }
+
+  &.disabled {
+    background-color: #b0b0b0;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}
