@@ -1,9 +1,9 @@
-import Link from "next/link";
+import MainScreen from "./components/Main-screen/Main-screen";
 
 export default function Home() {
   return (
     <main>
-      <div></div>
+      <MainScreen />
     </main>
   );
 }

@@ -1,0 +1,21 @@
+.modal-content {
+  .modal-close-btn {
+    font-size: 30px;
+    border: none;
+    background-color: transparent;
+    color: #2f2f2f;
+    position: absolute;
+    width: 30px;
+    font-weight: 400;
+    z-index: 99;
+    right: 0;
+    top: -3px;
+    transition: opacity 0.4s ease;
+    opacity: 1;
+
+    &:hover {
+      opacity: 0.7;
+      cursor: pointer;
+    }
+  }
+}

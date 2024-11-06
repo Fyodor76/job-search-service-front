@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.scss";
+import "../styles/globals.scss";
 import Header from "@/components/Header/Header";
 import block from "bem-cn-lite";
 
