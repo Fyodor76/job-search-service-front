@@ -12,7 +12,7 @@
 }
 
 .modal-content {
-  background-color: #fff;
+  background-color: $color-white;
   padding: 40px;
   padding-bottom: 20px;
   border-radius: 8px;
@@ -27,7 +27,7 @@
   padding: 0 20px 20px 20px;
   max-width: 450px;
   width: 100%;
-  background-color: #fff;
+  background-color: $color-white;
   border-radius: 10px;
 
   .modal-login-template__title {
@@ -35,6 +35,13 @@
     font-weight: bold;
     text-align: center;
     text-transform: uppercase;
+  }
+
+  .modal-login-template__clear-icon {
+    color: $color-dark;
+    position: absolute;
+    right: 2px;
+    top: 10px;
   }
 
   .modal-login-template__subtitle {
@@ -66,7 +73,7 @@
 
   .modal-login-template__modal-subtext {
     font-size: 12px;
-    color: #616161;
+    color: $color-text-light;
     text-align: center;
     margin-bottom: 10px;
     font-weight: 400;
@@ -104,7 +111,7 @@
   .modal-login-template__auth-icon {
     font-size: 24px;
     cursor: pointer;
-    color: white;
+    color: $color-white;
     transition: opacity 0.4s ease;
     background: $color-text;
 

@@ -1,6 +1,6 @@
 import React from "react";
 import block from "bem-cn-lite";
-import Button from "@/ui/Button";
+import Button from "@/ui/Button/Button";
 import MainScreenPicture from "@/svg/Main-screen-picture";
 
 const b = block("main-screen");

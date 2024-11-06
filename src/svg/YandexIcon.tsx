@@ -1,6 +1,6 @@
 import React from "react";
 
-const YandexIcon = () => (
+export const YandexIcon = () => (
   <svg
     width="8"
     height="16"
@@ -14,5 +14,3 @@ const YandexIcon = () => (
     />
   </svg>
 );
-
-export default YandexIcon;

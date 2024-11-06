@@ -1,7 +1,4 @@
-@import "variables";
-@import "../components/index.scss";
 @import "./index.scss";
-@import "../templates/index.scss";
 
 *,
 *::before,
@@ -36,7 +33,21 @@ h4,
 h5,
 h6 {
   font-weight: 600;
+  font-family: "Raleway", sans-serif;
   color: $color-text;
+}
+
+p,
+li,
+button,
+a {
+  font-weight: 400;
+  font-family: "Raleway", sans-serif;
+}
+
+button {
+  font-weight: 500;
+  font-family: "Raleway", sans-serif;
 }
 
 h1,
@@ -80,6 +91,7 @@ body {
 
 .main {
   padding: 15px;
+  border-radius: 10px;
   background: $color-light;
   height: 100%;
 }
@@ -88,6 +100,13 @@ body {
   font-family: "Raleway";
   src: url("/fonts/Raleway-Regular.woff2") format("woff2");
   font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Raleway";
+  src: url("/fonts/Raleway-Medium.woff2") format("woff2");
+  font-weight: 500;
   font-style: normal;
 }
 

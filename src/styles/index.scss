@@ -1,1 +1,5 @@
-@import "../app/components/index.scss";
+@import "variables";
+@import "../components/index.scss";
+@import "../templates/index.scss";
+@import "../app/\(main-page\)/components/index.scss";
+@import "../ui/index.scss";

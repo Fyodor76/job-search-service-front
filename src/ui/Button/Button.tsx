@@ -27,13 +27,10 @@ const Button: React.FC<ButtonProps> = ({
     <button
       onClick={onClick}
       style={{ backgroundColor: color }}
-      className={cn(
-        "button",
-        `button--${size}`,
-        `button--${isFullWidth && "full-width"}`,
-        { disabled: disabled || loading },
-        className,
-      )}
+      data-size={size}
+      data-full-width={isFullWidth ? "true" : "false"}
+      data-disabled={disabled || loading ? "true" : "false"}
+      className={cn("button", className)}
       disabled={disabled || loading}
     >
       {loading ? "Loading..." : children || "Button"}

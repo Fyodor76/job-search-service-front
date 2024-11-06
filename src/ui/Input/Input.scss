@@ -1,0 +1,101 @@
+@import "../../styles/variables.scss";
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input {
+  padding: 10px;
+  padding-right: 30px;
+  font-size: 14px;
+  color: $color-dark;
+  border: 1px solid $color-light-gray; // Используем светлый текстовый цвет для рамки
+  border-radius: 5px;
+  width: 100%;
+  transition:
+    border-color 0.8s ease,
+    background-color 0.8s ease,
+    opacity 0.8s ease;
+
+  .input-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    color: $color-text-light; // Цвет иконки
+    cursor: pointer;
+
+    &:hover {
+      color: $color-dark; // Меняем цвет при наведении
+    }
+  }
+
+  &[data-size="small"] {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  &[data-size="medium"] {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  &[data-size="large"] {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  // Полный размер инпута
+  &[data-full-width="true"] {
+    width: 100%;
+  }
+
+  // Стиль инпута при disabled
+  &[data-disabled="true"] {
+    opacity: 1;
+    cursor: not-allowed;
+    border-color: $color-text-light;
+    transition:
+      border-color 0.8s ease,
+      opacity 0.8s ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  // Стиль инпута при ошибке
+  &[data-error="true"] {
+    border-color: $color-dark; // Тёмная рамка для ошибок
+    transition: border-color 0.8s ease;
+  }
+
+  // Эффект при наведении
+  &:hover {
+    border-color: $color-dark; // Тёмная рамка при наведении
+  }
+
+  // Эффект при фокусе
+  &:focus {
+    outline: none;
+    border-color: $color-dark; // Тёмный цвет для фокуса
+  }
+
+  // Эффект при активации (клик)
+  &:active {
+    background-color: $color-light; // Лёгкое изменение фона при активации
+  }
+}
+
+.input-error {
+  color: $color-dark;
+  font-size: 12px;
+  margin-top: 5px;
+}

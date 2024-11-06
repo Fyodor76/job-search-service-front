@@ -1,29 +1,33 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { FaGoogle, FaTelegramPlane } from "react-icons/fa"; // Иконки Google и Telegram
 import block from "bem-cn-lite";
-import Button from "@/ui/Button";
-import YandexIcon from "@/svg/YandexIcon";
+import Button from "@/ui/Button/Button";
 import { GoogleIcon } from "@/svg/GoogleIcon";
 import { TelegramIcon } from "@/svg/TelegramIcon";
+import { YandexIcon } from "@/svg/YandexIcon";
+import Input from "@/ui/Input/Input";
+import ClearIcon from "@/svg/ClearIcon";
 
-// Типы для данных формы
 interface FormData {
   email: string;
 }
 
-const b = block("modal-login-template"); // Инициализация BEM для модалки
+const b = block("modal-login-template");
 
 const ModalLoginTemplate: React.FC = () => {
-  // Инициализация useForm
   const {
-    register,
+    control,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<FormData>();
 
   const onSubmit = (data: FormData) => {
     console.log("Submitted email:", data.email);
+  };
+
+  const clearEmail = () => {
+    setValue("email", "");
   };
 
   return (
@@ -31,17 +35,21 @@ const ModalLoginTemplate: React.FC = () => {
       <h2 className={b("title")}>Войдите в аккаунт</h2>
       <p className={b("subtitle")}>Введите свою электронную почту</p>
       <form onSubmit={handleSubmit(onSubmit)} className={b("form")}>
-        <input
+        <Input
           type="email"
           placeholder="example@mail.com"
-          {...register("email", {
+          size="medium"
+          required
+          control={control} // Передаем control в Input
+          name="email"
+          rules={{
             required: "Почта обязательна для заполнения",
             pattern: {
               value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
               message: "Введите корректный email",
             },
-          })}
-          className={b("input")}
+          }}
+          icon={<ClearIcon className={b("clear-icon")} onClick={clearEmail} />}
         />
         {errors.email && (
           <p className={b("error-message")}>{errors.email.message}</p>
