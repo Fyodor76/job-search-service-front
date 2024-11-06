@@ -14,11 +14,9 @@ const MainScreen: React.FC = () => {
         </div>
         <div className={b("subtitle")}>Подзаголовок в одну или пару строк</div>
         <div className={b("button-container")}>
-          <Button
-            label="Войти"
-            size="medium"
-            className={b("choose-service-button")}
-          />
+          <Button size="medium" className={b("choose-service-button")}>
+            Выбрать услугу
+          </Button>
         </div>
       </div>
       <div className={b("image-container")}>

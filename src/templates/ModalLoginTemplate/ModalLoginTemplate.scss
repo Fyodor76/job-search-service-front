@@ -4,21 +4,22 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); // Полупрозрачный серый фон
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; // Для того чтобы модалка была поверх всего контента
+  z-index: 1000;
 }
 
 .modal-content {
-  background-color: #fff; // Белый фон для модалки
+  background-color: #fff;
   padding: 40px;
+  padding-bottom: 20px;
   border-radius: 8px;
   width: 450px;
-  max-width: 90%; // Мобильно адаптивная ширина
+  max-width: 90%;
   position: relative;
-  z-index: 1010; // Чтобы кнопка была на переднем плане
+  z-index: 1010;
 }
 
 .modal-login-template {
@@ -33,12 +34,13 @@
     font-size: 24px;
     font-weight: bold;
     text-align: center;
+    text-transform: uppercase;
   }
 
   .modal-login-template__subtitle {
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 30px;
   }
 
   .modal-login-template__form {
@@ -63,31 +65,33 @@
   }
 
   .modal-login-template__modal-subtext {
-    font-size: 14px;
-    color: #777;
+    font-size: 12px;
+    color: #616161;
     text-align: center;
-  }
-
-  .modal-login-template__login-button {
-    padding: 10px;
-    font-size: 16px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background-color: #45a049;
-    }
+    margin-bottom: 10px;
+    font-weight: 400;
   }
 
   .modal-login-template__other-methods {
     text-align: center;
     font-size: 14px;
     margin-top: 20px;
+  }
+
+  .modal-login-template__icon-block {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    transition: opacity 0.4s ease;
+    background: $color-text;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.7;
+    }
   }
 
   .modal-login-template__auth-icons {
@@ -100,22 +104,24 @@
   .modal-login-template__auth-icon {
     font-size: 24px;
     cursor: pointer;
-    transition: color 0.3s ease;
+    color: white;
+    transition: opacity 0.4s ease;
+    background: $color-text;
 
     &:hover {
-      color: #4caf50;
+      opacity: 0.7;
     }
   }
 
   .modal-login-template__agreement {
     font-size: 12px;
-    color: #555;
+    margin-top: 30px;
+    color: $color-dark;
     text-align: center;
-    margin-top: 20px;
 
     a {
-      color: #4caf50;
-      text-decoration: none;
+      color: $color-dark;
+      text-decoration: underline;
     }
   }
 

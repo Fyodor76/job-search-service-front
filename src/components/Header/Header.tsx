@@ -22,12 +22,9 @@ const Header: React.FC = () => {
         <Logotype className={b("logotype")} />
         <Menu className={b("menu")} />
       </div>
-      <Button
-        label="Войти"
-        size="medium"
-        className={b("login-button")}
-        onClick={openModal}
-      />
+      <Button size="medium" className={b("login-button")} onClick={openModal}>
+        Войти
+      </Button>
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <ModalLoginTemplate />
