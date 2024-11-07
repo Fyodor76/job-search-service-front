@@ -56,18 +56,18 @@ const Input: React.FC<InputProps> = ({
           name={name}
           required={required}
           pattern={pattern}
-          data-size={size}
-          data-full-width={isFullWidth ? "true" : "false"}
-          data-disabled={disabled ? "true" : "false"}
-          data-error={fieldError ? "true" : "false"}
-          className={cn("input", `input--${size}`, {
+          data-size={size} // data-атрибут для размера
+          data-full-width={isFullWidth ? "true" : "false"} // data-атрибут для ширины
+          data-disabled={disabled ? "true" : "false"} // data-атрибут для состояния disabled
+          data-error={fieldError ? "true" : "false"} // data-атрибут для ошибки
+          className={cn("input", {
             "input--error": fieldError,
             "input--disabled": disabled,
             "input--full-width": isFullWidth,
           })}
           disabled={disabled}
         />
-        {icon && value && <span className="input-icon">{icon}</span>}
+        {icon && value && <span className="input-icon">{icon}</span>}{" "}
       </div>
       {fieldError && <div className="input-error">{fieldError.message}</div>}
     </div>

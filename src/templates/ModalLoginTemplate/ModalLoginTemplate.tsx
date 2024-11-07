@@ -7,9 +7,11 @@ import { TelegramIcon } from "@/svg/TelegramIcon";
 import { YandexIcon } from "@/svg/YandexIcon";
 import Input from "@/ui/Input/Input";
 import ClearIcon from "@/svg/ClearIcon";
+import Checkbox from "@/ui/Checkbox/Checkbox";
 
 interface FormData {
   email: string;
+  termsAccepted: boolean;
 }
 
 const b = block("modal-login-template");
@@ -23,7 +25,7 @@ const ModalLoginTemplate: React.FC = () => {
   } = useForm<FormData>();
 
   const onSubmit = (data: FormData) => {
-    console.log("Submitted email:", data.email);
+    console.log("Submitted email:", data);
   };
 
   const clearEmail = () => {
@@ -72,12 +74,22 @@ const ModalLoginTemplate: React.FC = () => {
         </div>
       </div>
       <div className={b("agreement")}>
-        <label>
-          <input type="checkbox" className={b("checkbox")} /> Авторизируясь в
-          Системе, вы подтверждаете, что принимаете условия{" "}
-          <a href="/terms">Пользовательского соглашения</a> и даете добровольное
-          согласие на обработку ваших персональных данных
-        </label>
+        <Checkbox
+          id="termsCheckbox"
+          label={
+            <p>
+              Авторизируясь в Системе, вы подтверждаете, что принимаете условия{" "}
+              <a href="/terms" target="_blank" rel="noopener noreferrer">
+                Пользовательского соглашения
+              </a>{" "}
+              и даете добровольное согласие на обработку ваших персональных
+              данных
+            </p>
+          }
+          name="termsAccepted"
+          control={control}
+          rules={{ required: "Вы должны согласиться с условиями" }}
+        />
       </div>
     </div>
   );

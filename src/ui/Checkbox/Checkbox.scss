@@ -1,0 +1,86 @@
+@import "../../styles/variables.scss";
+
+.checkbox-wrapper {
+  display: flex;
+  flex-direction: column; /* Сделаем это, чтобы ошибка располагалась под чекбоксом */
+  gap: 4px; // Уменьшаем расстояние между чекбоксом и ошибкой
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center; /* Чекбокс и лейбл будут на одной строке */
+  position: relative;
+}
+
+.checkbox-input {
+  position: absolute;
+  opacity: 0; // Скрываем инпут
+  width: 1.6em;
+  height: 1.6em;
+  left: 0;
+  z-index: 10; // Инпут должен быть выше кастомного чекбокса, чтобы получать клики
+  cursor: pointer; // Курсор для интерактивности
+}
+
+// Кастомный чекбокс
+.custom-checkbox {
+  width: 1.6em;
+  height: 1.6em;
+  border: 1px solid $color-light-gray;
+  border-radius: 0.15em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    border-color 0.3s ease,
+    background-color 0.3s ease;
+
+  &:hover {
+    border-color: $color-dark;
+  }
+
+  &.checked {
+    color: #fff; // Иконка будет белой внутри темного фона
+  }
+
+  svg {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    fill: #fff;
+  }
+}
+
+// При наведении на чекбокс (checkbox-input), меняем цвет рамки кастомного чекбокса
+.checkbox-input:hover + .custom-checkbox {
+  border-color: $color-dark;
+}
+
+// Когда инпут выбран (checked), меняем внешний вид кастомного чекбокса
+.checkbox-input:checked + .custom-checkbox {
+  border-color: $color-dark;
+}
+
+// Стили для disabled состояния
+.checkbox-input:disabled + .custom-checkbox {
+  border-color: #c0c0c0;
+  background-color: #c0c0c0;
+}
+
+.checkbox-input:disabled + .custom-checkbox svg {
+  fill: #c0c0c0;
+}
+
+// Стили для лейбла
+.checkbox-label {
+  white-space: normal;
+  margin-left: 8px; // Добавим немного отступа между чекбоксом и лейблом
+}
+
+// Стили для ошибки
+.checkbox-error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px; // Немного увеличим отступ, чтобы ошибка не слипалась с чекбоксом
+}
