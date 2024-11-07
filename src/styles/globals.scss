@@ -84,7 +84,6 @@ a {
 }
 
 body {
-  padding: 15px;
   height: 100%;
   border-radius: 7px;
 }
@@ -92,8 +91,8 @@ body {
 .main {
   padding: 15px;
   border-radius: 10px;
-  background: $color-light;
   height: 100%;
+  position: relative;
 }
 
 @font-face {

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "../styles/globals.scss";
-import Header from "@/components/Header/Header";
 import block from "bem-cn-lite";
 
 const b = block("main");
@@ -18,10 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className={b()}>
-          <Header />
-          {children}
-        </div>
+        <div className={b()}>{children}</div>
       </body>
     </html>
   );

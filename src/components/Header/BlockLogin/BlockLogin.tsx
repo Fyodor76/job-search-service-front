@@ -13,7 +13,9 @@ const BlockLogin = () => {
 
   return (
     <>
-      <LoginButton onClick={openModal} />
+      <div>
+        <LoginButton onClick={openModal} />
+      </div>
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <ModalLoginTemplate />
