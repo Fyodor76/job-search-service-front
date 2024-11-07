@@ -42,7 +42,7 @@ const ModalLoginTemplate: React.FC = () => {
           placeholder="example@mail.com"
           size="medium"
           required
-          control={control} // Передаем control в Input
+          control={control}
           name="email"
           rules={{
             required: "Почта обязательна для заполнения",
@@ -53,9 +53,6 @@ const ModalLoginTemplate: React.FC = () => {
           }}
           icon={<ClearIcon className={b("clear-icon")} onClick={clearEmail} />}
         />
-        {errors.email && (
-          <p className={b("error-message")}>{errors.email.message}</p>
-        )}
         <p className={b("modal-subtext")}>
           Найдем вас в системе или зарегистрируем
         </p>
