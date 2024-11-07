@@ -24,7 +24,7 @@ const ServicesScreen = () => {
         <ServiceBlock
           title="создание лендинга под ваше резюме"
           picture={<LandingIcon />}
-          link="/landing"
+          link="/user-page"
         />
       </div>
     </div>

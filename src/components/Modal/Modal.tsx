@@ -1,9 +1,8 @@
 import React, { useState, useEffect, ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ReactDOM from "react-dom";
-import "./Modal.scss"; // Для стилей
+import "./Modal.scss";
 
-// Типы пропсов для компонента Modal
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -14,14 +13,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsClient(true); // Устанавливаем флаг, когда компонент монтируется на клиенте
+    setIsClient(true);
   }, []);
 
   const handleClose = () => {
     onClose();
   };
 
-  // Отображаем модальное окно только на клиенте
   if (!isClient) {
     return null;
   }
