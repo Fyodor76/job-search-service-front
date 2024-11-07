@@ -40,10 +40,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
           <motion.div
             className="modal-content"
             onClick={(e) => e.stopPropagation()}
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0.8 }}
-            transition={{ duration: 0.3 }}
           >
             <button className="modal-close-btn" onClick={handleClose}>
               &times;
