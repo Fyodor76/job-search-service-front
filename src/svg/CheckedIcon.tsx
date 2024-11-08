@@ -1,9 +1,10 @@
 const CheckedIcon = () => {
   return (
     <svg
-      width="50"
-      height="50"
+      width="14"
+      height="9"
       viewBox="0 0 9 7"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

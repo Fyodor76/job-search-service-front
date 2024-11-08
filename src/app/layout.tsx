@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import "../styles/globals.scss";
 import block from "bem-cn-lite";
 

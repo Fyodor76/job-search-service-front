@@ -2,6 +2,8 @@
   background: $color-light;
   padding: 15px;
   height: calc(100vh - 15px);
+  position: relative;
+  z-index: 3;
 
   .main-screen__container {
     display: flex;
@@ -12,10 +14,11 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding-left: 100px;
+      width: 50%;
       gap: 25px;
 
       .main-screen__title {
+        max-width: 589px;
         h1 {
           font-size: 55px;
           @media (max-width: 1200px) {

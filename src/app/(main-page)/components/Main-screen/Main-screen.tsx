@@ -1,8 +1,8 @@
 import React from "react";
 import block from "bem-cn-lite";
-import Button from "@/ui/Button/Button";
 import MainScreenPicture from "@/svg/Main-screen-picture";
 import Header from "@/components/Header/Header";
+import ButtonScrollToService from "./ButtonScrollToService";
 
 const b = block("main-screen");
 
@@ -19,9 +19,7 @@ const MainScreen: React.FC = () => {
             Подзаголовок в одну или пару строк
           </div>
           <div className={b("button-container")}>
-            <Button size="medium" className={b("choose-service-button")}>
-              Выбрать услугу
-            </Button>
+            <ButtonScrollToService />
           </div>
         </div>
         <div className={b("image-container")}>

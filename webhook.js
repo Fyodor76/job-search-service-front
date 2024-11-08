@@ -17,7 +17,7 @@ app.post("/webhook", (req, res) => {
 
   // Выполняем команды асинхронно в фоне
   exec(
-    "git pull && docker-compose down && docker-compose build --no-cache && docker-compose up -d",
+    "git pull && docker-compose down && docker-compose up --build -d",
     (error, stdout, stderr) => {
       if (error) {
         console.error(`Error executing command: ${error.message}`);
