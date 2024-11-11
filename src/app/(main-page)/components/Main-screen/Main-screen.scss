@@ -1,9 +1,10 @@
 .main-screen {
   background: $color-light;
   padding: 15px;
-  height: calc(100vh - 15px);
+  height: calc(100vh - 30px);
   position: relative;
-  z-index: 3;
+  border-radius: 10px;
+  z-index: 5;
 
   .main-screen__container {
     display: flex;
@@ -14,61 +15,60 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      width: 50%;
+      width: 100%;
       gap: 25px;
 
-      .main-screen__title {
-        max-width: 589px;
-        h1 {
-          font-size: 55px;
-          @media (max-width: 1200px) {
-            font-size: 35px;
-          }
+      .main-screen__block-titles {
+        max-width: 50%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-left: 5%;
 
-          @media (max-width: 992px) {
-            font-size: 25px;
-          }
+        @media (min-width: 1640px) {
+          margin: 0 auto;
+        }
 
-          @media (max-width: 768px) {
-            font-size: 21px;
-          }
-
-          @media (max-width: 550px) {
-            font-size: 15px;
-          }
+        .main-screen__title {
+          max-width: 589px;
         }
       }
 
       .main-screen__subtitle {
-        font-size: 15px;
+        font-size: calc(0.5rem + 1vw); // Адаптивный размер заголовка
       }
     }
 
     .main-screen__image-container {
       height: 100%;
+      width: 100%;
       display: flex;
       justify-content: center;
       flex-direction: column;
 
-      .main-screen-picture {
-        width: 705px;
-        height: 662px;
-
-        @media (max-width: 1200px) {
-          width: 550px;
-          height: 500px;
-        }
-
-        @media (max-width: 992px) {
-          width: 450px;
-          height: 350px;
-        }
-
-        @media (max-width: 768px) {
-          width: auto;
-          height: 310px;
-        }
+      svg {
+        width: 70%;
       }
+
+      // .main-screen-picture {
+      //   width: 705px;
+      //   height: 662px;
+
+      //   @media (max-width: 1200px) {
+      //     width: 550px;
+      //     height: 500px;
+      //   }
+
+      //   @media (max-width: 992px) {
+      //     width: 450px;
+      //     height: 350px;
+      //   }
+
+      //   @media (max-width: 768px) {
+      //     width: auto;
+      //     height: 310px;
+      //   }
+      // }
     }
 
     @media (max-width: 550px) {

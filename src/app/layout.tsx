@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import "../styles/globals.scss";
 import block from "bem-cn-lite";
+import Script from "next/script";
 
 const b = block("main");
 
@@ -16,6 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Script src="/scripts/addCircleBehindElement.js" type="module" defer />
+      </head>
       <body>
         <div className={b()}>{children}</div>
       </body>

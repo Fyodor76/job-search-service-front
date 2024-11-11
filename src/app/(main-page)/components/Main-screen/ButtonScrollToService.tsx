@@ -15,7 +15,7 @@ const ButtonScrollToService = () => {
 
   return (
     <Button
-      size="medium"
+      size="large"
       className={b("choose-service-button")}
       onClick={scrollToServiceSection}
     >

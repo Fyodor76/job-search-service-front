@@ -95,6 +95,30 @@ body {
   position: relative;
 }
 
+h1 {
+  font-size: calc(2rem + 3vw); // Уменьшенный базовый размер для h1
+}
+
+h2 {
+  font-size: calc(1.4rem + 0.7vw);
+}
+
+h3 {
+  font-size: calc(1.3rem + 0.6vw);
+}
+
+h4 {
+  font-size: calc(1.2rem + 0.5vw);
+}
+
+h5 {
+  font-size: calc(1rem + 0.4vw);
+}
+
+h6 {
+  font-size: calc(0.9rem + 0.3vw);
+}
+
 @font-face {
   font-family: "Raleway";
   src: url("/fonts/Raleway-Regular.woff2") format("woff2");

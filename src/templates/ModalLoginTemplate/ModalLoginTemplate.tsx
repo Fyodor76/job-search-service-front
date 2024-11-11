@@ -34,7 +34,7 @@ const ModalLoginTemplate: React.FC = () => {
 
   return (
     <div className={b()}>
-      <h2 className={b("title")}>Войдите в аккаунт</h2>
+      <h5 className={b("title")}>Войдите в аккаунт</h5>
       <p className={b("subtitle")}>Введите свою электронную почту</p>
       <form onSubmit={handleSubmit(onSubmit)} className={b("form")}>
         <Input

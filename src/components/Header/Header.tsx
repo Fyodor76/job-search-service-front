@@ -11,13 +11,6 @@ const b = block("header");
 const Header: React.FC = () => {
   return (
     <header className={cn(b())}>
-      <Circle
-        width="110px"
-        height="110px"
-        clipTop="20%" // Обрезка 10% сверху
-        top="-38px"
-        left="70px"
-      />
       <div className={b("container")}>
         <Logotype className={b("logotype")} />
         <Menu className={b("menu")} />

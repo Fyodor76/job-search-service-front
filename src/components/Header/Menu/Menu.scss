@@ -9,7 +9,7 @@
       height: 100%;
 
       .header__menu__item {
-        font-size: 11px;
+        font-size: calc(10px + 0.25vw);
 
         a {
           transition: opacity 0.4s ease;

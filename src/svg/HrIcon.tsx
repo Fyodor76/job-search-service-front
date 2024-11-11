@@ -1,8 +1,13 @@
-export const HrIcon = () => {
+import { FC } from "react";
+
+export const HrIcon: FC<{ width?: string; height?: string }> = ({
+  width = "100%",
+  height = "100%",
+}) => {
   return (
     <svg
-      width="261"
-      height="210"
+      width={width}
+      height={height}
       viewBox="0 0 261 210"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

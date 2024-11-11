@@ -1,8 +1,13 @@
-export const FormIcon = () => {
+import { FC } from "react";
+
+export const FormIcon: FC<{ width?: string; height?: string }> = ({
+  width = "100%",
+  height = "100%",
+}) => {
   return (
     <svg
-      width="215"
-      height="215"
+      width={width}
+      height={height}
       viewBox="0 0 215 215"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

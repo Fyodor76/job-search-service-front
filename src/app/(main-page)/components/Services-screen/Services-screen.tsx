@@ -3,7 +3,6 @@ import ServiceBlock from "./ServiceBlock";
 import { HrIcon } from "@/svg/HrIcon";
 import { LandingIcon } from "@/svg/LandingIcon";
 import block from "bem-cn-lite";
-import Circle from "@/components/Circle/Circle";
 
 const b = block("services-screen");
 
@@ -16,13 +15,6 @@ const ServicesScreen = () => {
           title="создание резюме по готовым шаблонам"
           picture={<FormIcon />}
           link="/resume"
-        />
-        <Circle
-          width="160px"
-          height="160px"
-          zIndex="1"
-          left="30%"
-          style={{ marginTop: "210px" }}
         />
         <ServiceBlock
           title="консультация с hr по вашей вакансии"
