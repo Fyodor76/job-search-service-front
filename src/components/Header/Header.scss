@@ -10,5 +10,15 @@
     flex: 1;
     border-radius: 7px;
     background-color: $color-white;
+
+    @media (min-width: 1600px) {
+      padding: 16px;
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .header__login-button {
+      height: 56px !important;
+    }
   }
 }

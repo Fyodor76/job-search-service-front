@@ -27,5 +27,11 @@
     @media (max-width: 992px) {
       width: 100%;
     }
+
+    @media (min-width: 1600px) {
+      .header__menu__item {
+        font-size: calc(12px + 0.25vw) !important;
+      }
+    }
   }
 }
