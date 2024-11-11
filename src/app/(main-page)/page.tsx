@@ -32,7 +32,7 @@ const elementsData = [
   },
   {
     element: <SvgComponent svgContent={<CloudIconFour />} />,
-    top: "70%",
+    top: "73%",
     left: "28%",
     id: "cloud-icon-4",
     zIndex: "1",
