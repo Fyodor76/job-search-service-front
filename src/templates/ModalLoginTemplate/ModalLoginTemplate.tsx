@@ -33,26 +33,8 @@ const ModalLoginTemplate: React.FC = () => {
   };
 
   const authLogin = () => {
-    fetch("https://api.job-search-service.ru/auth/google/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Ошибка: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log("Ответ от API:", data);
-      })
-      .catch(error => {
-        console.error("Произошла ошибка:", error);
-      });
-  }
-
+    window.location.href = "https://api.job-search-service.ru/auth/google/";
+  };
   return (
     <div className={b()}>
       <h5 className={b("title")}>Войдите в аккаунт</h5>
