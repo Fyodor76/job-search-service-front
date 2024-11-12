@@ -4,7 +4,6 @@ import block from "bem-cn-lite";
 import Menu from "./Menu/Menu";
 import Logotype from "./Logotype/Logotype";
 import BlockLogin from "./BlockLogin/BlockLogin";
-import Circle from "../Circle/Circle";
 
 const b = block("header");
 

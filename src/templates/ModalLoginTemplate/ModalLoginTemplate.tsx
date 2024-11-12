@@ -32,6 +32,27 @@ const ModalLoginTemplate: React.FC = () => {
     setValue("email", "");
   };
 
+  const authLogin = () => {
+    fetch("https://api.job-search-service.ru/auth/google/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Ошибка: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log("Ответ от API:", data);
+      })
+      .catch(error => {
+        console.error("Произошла ошибка:", error);
+      });
+  }
+
   return (
     <div className={b()}>
       <h5 className={b("title")}>Войдите в аккаунт</h5>
@@ -60,10 +81,10 @@ const ModalLoginTemplate: React.FC = () => {
       </form>
       <p className={b("other-methods")}>Или используйте другие способы</p>
       <div className={b("auth-icons")}>
-        <div className={b("icon-block")}>
+        <div className={b("icon-block")} >
           <YandexIcon />
         </div>
-        <div className={b("icon-block")}>
+        <div className={b("icon-block")} onClick={authLogin}>
           <GoogleIcon />
         </div>
         <div className={b("icon-block")}>

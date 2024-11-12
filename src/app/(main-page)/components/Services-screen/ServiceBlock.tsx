@@ -18,7 +18,7 @@ const ServiceBlock: FC<ServiceBlockProps> = ({ title, link, picture }) => {
       <ClientLink link={link} />
       <div className={b("title")}>
         <div className={b("text")}>
-          <h5>{title}</h5>
+          <h2>{title}</h2>
         </div>
         <div className={b("arrow-block")}>
           <ArrowIcon />
