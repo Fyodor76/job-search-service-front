@@ -8,6 +8,8 @@ import { YandexIcon } from "@/svg/YandexIcon";
 import Input from "@/ui/Input/Input";
 import ClearIcon from "@/svg/ClearIcon";
 import Checkbox from "@/ui/Checkbox/Checkbox";
+import Link from "next/link";
+import { baseUrl } from "@/const/baseUrl";
 
 interface FormData {
   email: string;
@@ -63,15 +65,20 @@ const ModalLoginTemplate: React.FC = () => {
       </form>
       <p className={b("other-methods")}>Или используйте другие способы</p>
       <div className={b("auth-icons")}>
-        <div className={b("icon-block")} >
+        <Link href={`${baseUrl}/auth/google/`} className={b("icon-block")} >
           <YandexIcon />
-        </div>
-        <div className={b("icon-block")} onClick={authLogin}>
+        </Link>
+        <Link href={`${baseUrl}/auth/google/`} className={b("icon-block")}>
           <GoogleIcon />
-        </div>
-        <div className={b("icon-block")}>
-          <TelegramIcon />
-        </div>
+        </Link>
+        <Link
+          href="https://t.me/job_search_service_bot"
+          className={b("icon-block")}
+          target="_blank"
+          rel="noopener noreferrer"
+    >
+         <TelegramIcon />
+      </Link>
       </div>
       <div className={b("agreement")}>
         <Checkbox
