@@ -1,5 +1,4 @@
 import Button from "@/ui/Button/Button";
-import LoginButton from "../LoginButton/LoginButton";
 import block from "bem-cn-lite";
 import { emojiList } from "@/const/emojiList";
 
