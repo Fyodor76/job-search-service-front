@@ -1,27 +1,3 @@
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background-color: $color-white;
-  padding: 40px;
-  padding-bottom: 20px;
-  border-radius: 8px;
-  width: 480px;
-  max-width: 90%;
-  position: relative;
-  z-index: 1010;
-}
-
 .modal-login-template {
   position: relative;
   padding: 0 20px 20px 20px;

@@ -2,6 +2,9 @@
   .header__logotype {
     width: 20%;
     padding-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     p {
       font-weight: bold;

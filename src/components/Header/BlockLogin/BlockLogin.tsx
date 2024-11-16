@@ -1,26 +1,19 @@
-"use client";
+import BlockLoginServer from "../BlockLoginServer/BlockLoginServer";
+import BlockLoginClient from "../BlockLoginClient/BlockLoginClient";
+import { checkAuth } from "@/helpers/auth";
+import block from "bem-cn-lite";
 
-import Modal from "@/components/Modal/Modal";
-import ModalLoginTemplate from "@/templates/ModalLoginTemplate/ModalLoginTemplate";
-import { useState } from "react";
-import LoginButton from "../LoginButton/LoginButton";
+const b = block("header");
 
-const BlockLogin = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+const BlockLogin: React.FC = async () => {
+  const { isAuth } = await checkAuth();
 
   return (
-    <>
-      <div>
-        <LoginButton onClick={openModal} />
-      </div>
+    <div className={b("block_login")}>
+      <BlockLoginServer isAuth={isAuth} />
 
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <ModalLoginTemplate />
-      </Modal>
-    </>
+      <BlockLoginClient isAuth={isAuth} />
+    </div>
   );
 };
 

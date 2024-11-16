@@ -1,14 +1,13 @@
 import React, { useState, useEffect, ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import ReactDOM from "react-dom";
 
-interface ModalProps {
+interface PopupProps {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Popup: React.FC<PopupProps> = ({ isOpen, onClose, children }) => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -29,39 +28,50 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     };
   }, [isOpen, onClose]);
 
-  const handleClose = () => {
-    onClose();
-  };
+  useEffect(() => {
+    if (isOpen) {
+      const handleOverlayClick = (event: MouseEvent) => {
+        const overlay = document.querySelector(".popup-overlay");
+        if (overlay && !overlay.contains(event.target as Node)) {
+          onClose();
+        }
+      };
+
+      document.addEventListener("click", handleOverlayClick);
+
+      return () => {
+        document.removeEventListener("click", handleOverlayClick);
+      };
+    }
+  }, [isOpen, onClose]);
 
   if (!isClient) {
     return null;
   }
 
-  return ReactDOM.createPortal(
+  return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="modal-overlay"
-          onClick={handleClose}
+          className="popup-overlay"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
         >
           <motion.div
-            className="modal-content"
-            onClick={(e) => e.stopPropagation()}
+            className="popup-content"
+            // Здесь уже не нужно ловить событие клика
           >
-            <button className="modal-close-btn" onClick={handleClose}>
+            <button className="popup-close-btn" onClick={onClose}>
               &times;
             </button>
             {children}
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>,
-    document.body,
+    </AnimatePresence>
   );
 };
 
-export default Modal;
+export default Popup;

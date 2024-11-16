@@ -27,6 +27,10 @@
 
         @media (min-width: 1640px) {
           margin: 0 auto;
+
+          .main-screen__choose-service-button {
+            width: 180px;
+          }
         }
 
         .main-screen__title {
@@ -49,26 +53,6 @@
       svg {
         width: 70%;
       }
-
-      // .main-screen-picture {
-      //   width: 705px;
-      //   height: 662px;
-
-      //   @media (max-width: 1200px) {
-      //     width: 550px;
-      //     height: 500px;
-      //   }
-
-      //   @media (max-width: 992px) {
-      //     width: 450px;
-      //     height: 350px;
-      //   }
-
-      //   @media (max-width: 768px) {
-      //     width: auto;
-      //     height: 310px;
-      //   }
-      // }
     }
 
     @media (max-width: 550px) {

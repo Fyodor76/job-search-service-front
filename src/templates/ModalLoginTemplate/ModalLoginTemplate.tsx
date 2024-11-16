@@ -34,9 +34,6 @@ const ModalLoginTemplate: React.FC = () => {
     setValue("email", "");
   };
 
-  const authLogin = () => {
-    window.location.href = "https://api.job-search-service.ru/auth/google/";
-  };
   return (
     <div className={b()}>
       <h5 className={b("title")}>Войдите в аккаунт</h5>
@@ -65,7 +62,7 @@ const ModalLoginTemplate: React.FC = () => {
       </form>
       <p className={b("other-methods")}>Или используйте другие способы</p>
       <div className={b("auth-icons")}>
-        <Link href={`${baseUrl}/auth/google/`} className={b("icon-block")} >
+        <Link href={`${baseUrl}/auth/yandex/`} className={b("icon-block")}>
           <YandexIcon />
         </Link>
         <Link href={`${baseUrl}/auth/google/`} className={b("icon-block")}>
@@ -76,9 +73,9 @@ const ModalLoginTemplate: React.FC = () => {
           className={b("icon-block")}
           target="_blank"
           rel="noopener noreferrer"
-    >
-         <TelegramIcon />
-      </Link>
+        >
+          <TelegramIcon />
+        </Link>
       </div>
       <div className={b("agreement")}>
         <Checkbox

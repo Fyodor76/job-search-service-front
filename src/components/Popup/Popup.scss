@@ -1,0 +1,29 @@
+.popup-overlay {
+  position: absolute;
+  right: -10px;
+  top: 112%;
+  background: white;
+  border-radius: 10px;
+
+  .popup-content {
+    .popup-close-btn {
+      font-size: 1.5vw;
+      border: none;
+      background-color: transparent;
+      color: #2f2f2f;
+      position: absolute;
+      width: 30px;
+      font-weight: 400;
+      z-index: 99;
+      right: 0;
+      top: -3px;
+      transition: opacity 0.4s ease;
+      opacity: 1;
+
+      &:hover {
+        opacity: 0.7;
+        cursor: pointer;
+      }
+    }
+  }
+}
