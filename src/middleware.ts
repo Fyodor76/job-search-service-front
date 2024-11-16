@@ -7,9 +7,10 @@ export async function middleware(req: NextRequest) {
   const refreshToken = req.cookies.get("refreshToken")?.value;
   const response = NextResponse.next();
 
-  console.log("33333");
-
   const refreshTokenString = `refreshToken=${refreshToken};`;
+
+  console.log(req.cookies.getAll(), "cookies get all in ");
+  console.log(refreshToken, "refresh token in front middleware");
 
   // Извлекаем оригинальный user-agent
   const userAgent = req.headers.get("user-agent");
