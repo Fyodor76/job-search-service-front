@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import apiClient from "../../../../../axios.config";
 
 type TestComponentProps = {
   isAuth?: boolean;
@@ -9,20 +10,10 @@ export const TestComponent = ({ isAuth = false }: TestComponentProps) => {
   // Функция для выполнения запроса
   const handleClick = async () => {
     try {
-      const response = await fetch("https://api.job-search-service.ru/", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      console.log("Response data:", response);
+      const response = await apiClient.get("/test");
+      console.log("Response data:", response.data);
     } catch (error) {
-      console.error("Error during fetch:", error);
+      console.error("Error during request:", error);
     }
   };
 
