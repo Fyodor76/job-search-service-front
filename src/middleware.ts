@@ -6,6 +6,7 @@ export async function middleware(req: NextRequest) {
   const accessToken = req.cookies.get("accessToken")?.value;
   const refreshToken = req.cookies.get("refreshToken")?.value;
   const response = NextResponse.next();
+  console.log(req.url, "reqUrl");
 
   const refreshTokenString = `refreshToken=${refreshToken};`;
 
@@ -18,7 +19,6 @@ export async function middleware(req: NextRequest) {
   if (accessToken) {
     try {
       const secret = new TextEncoder().encode(process.env.JWT_SECRET);
-      console.log(secret, "secret");
       await jwtVerify(accessToken, secret);
       console.log("Access token is valid");
       return response;
@@ -48,8 +48,7 @@ export async function middleware(req: NextRequest) {
 
         response.headers.set("x-access-token", tokens.accessToken);
         response.headers.set("x-refresh-token", tokens.refreshToken);
-
-        window.location.reload();
+        return NextResponse.redirect(req.url);
       } else {
         console.error("Failed to refresh token");
       }

@@ -10,6 +10,7 @@ export const AuthServices = {
 
       console.log("Logout successful:", data);
 
+      window.location.reload();
       return data;
     } catch (error) {
       console.error("Logout error:", error);
