@@ -13,6 +13,16 @@ RUN yarn install --production
 # Копируем все файлы проекта
 COPY . .
 
+ARG NODE_ENV
+ARG NEXT_PUBLIC_API_URL
+ARG JWT_SECRET
+ARG JWT_SECRET_REFRESH
+
+ENV NODE_ENV=${NODE_ENV}
+ENV REDIS_PROD_URL=${NEXT_PUBLIC_API_URL}
+ENV BOT_TOKEN=${JWT_SECRET} 
+ENV BOT_TOKEN_TEST=${JWT_SECRET_REFRESH}
+
 # Собираем проект
 RUN yarn build
 

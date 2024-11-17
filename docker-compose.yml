@@ -1,8 +1,23 @@
-version: '3'
 services:
   app:
-    build: .
+    build:
+      context: .
+      args:
+        NODE_ENV: ${NODE_ENV}
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+        JWT_SECRET: ${JWT_SECRET}
+        JWT_SECRET_REFRESH: ${JWT_SECRET_REFRESH}
     ports:
-      - '3000:3000'
+      - "3000:3000"
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=${NODE_ENV}
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_SECRET_REFRESH=${JWT_SECRET_REFRESH}
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    name: my-network
+    driver: bridge
