@@ -11,11 +11,19 @@ apiClient.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+    // Добавляем свойство _retryCount для контроля количества попыток
+    originalRequest._retryCount = originalRequest._retryCount || 0;
+
+    // Ограничение на количество повторных запросов
+    const maxRetries = 1;
+
+    if (
+      error.response?.status === 401 && 
+      originalRequest._retryCount < maxRetries
+    ) {
+      originalRequest._retryCount += 1; // Увеличиваем счетчик
 
       try {
-        console.log("123");
         const refreshResponse = await apiClient.post(
           "/auth/refresh-token",
           null,
@@ -25,14 +33,17 @@ apiClient.interceptors.response.use(
         );
 
         if (refreshResponse.status === 200) {
-          return apiClient(originalRequest);
+          // Устанавливаем новые токены, если требуется
+          return apiClient(originalRequest); // Повторяем запрос
         }
       } catch (refreshError) {
+        // Удаляем токены, если обновление не удалось
         document.cookie =
           "accessToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
         document.cookie =
           "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 
+        // Перенаправляем пользователя на главную страницу
         if (window.location.pathname === "/") {
           window.location.reload();
         } else {
@@ -42,6 +53,7 @@ apiClient.interceptors.response.use(
       }
     }
 
+    // Если превысили количество попыток, возвращаем ошибку
     return Promise.reject(error);
   },
 );

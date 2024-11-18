@@ -24,6 +24,7 @@ export async function middleware(req: NextRequest) {
       return response;
     } catch (error) {
       console.log("tokenError:", error);
+      NextResponse.next();
     }
   }
 
@@ -34,7 +35,6 @@ export async function middleware(req: NextRequest) {
         headers: {
           "Content-Type": "application/json",
           Cookie: refreshTokenString,
-          // Передаем оригинальный user-agent в заголовках
           "User-Agent": userAgent || "unknown",
         },
         credentials: "include",
@@ -42,15 +42,14 @@ export async function middleware(req: NextRequest) {
 
       if (refreshResponse.ok) {
         const tokens = await refreshResponse.json();
-        console.log(tokens, "tokents tokeeeens");
         response.cookies.set("accessToken", tokens.accessToken);
         response.cookies.set("refreshToken", tokens.refreshToken);
 
         response.headers.set("x-access-token", tokens.accessToken);
         response.headers.set("x-refresh-token", tokens.refreshToken);
-        return NextResponse.redirect(req.url);
       } else {
         console.error("Failed to refresh token");
+        return NextResponse.redirect("/");
       }
     } catch (error) {}
   }
