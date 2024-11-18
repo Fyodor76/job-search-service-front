@@ -43,7 +43,7 @@ export async function middleware(req: NextRequest) {
         // Сохраняем новые токены в cookies
         response.cookies.set("accessToken", tokens.accessToken, {
           httpOnly: true,
-          secure: false,
+          secure: !isDevelopment,
           sameSite: "lax",
           domain: !isDevelopment ? ".api.job-search-service.ru" : "localhost",
           maxAge: 15 * 60, // 15 минут для accessToken
@@ -51,7 +51,7 @@ export async function middleware(req: NextRequest) {
 
         response.cookies.set("refreshToken", tokens.refreshToken, {
           httpOnly: true,
-          secure: false,
+          secure: !isDevelopment,
           sameSite: "lax",
           domain: !isDevelopment ? ".api.job-search-service.ru" : "localhost",
           maxAge: 60 * 24 * 60 * 60, // 60 дней для refreshToken
