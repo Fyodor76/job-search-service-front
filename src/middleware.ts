@@ -47,7 +47,7 @@ export async function middleware(req: NextRequest) {
           httpOnly: true,
           secure: false,
           sameSite: "lax",
-          domain: !isDevelopment ? ".job-search-service.ru" : "localhost",
+          domain: !isDevelopment ? ".api.job-search-service.ru" : "localhost",
           maxAge: 15 * 60,
         });
 
@@ -55,7 +55,7 @@ export async function middleware(req: NextRequest) {
           httpOnly: true,
           secure: false,
           sameSite: "lax",
-          domain: !isDevelopment ? ".job-search-service.ru" : "localhost",
+          domain: !isDevelopment ? ".api.job-search-service.ru" : "localhost",
           maxAge: 60 * 24 * 60 * 60,
         });
 
