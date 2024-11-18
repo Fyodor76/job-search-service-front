@@ -6,7 +6,8 @@ export async function middleware(req: NextRequest) {
   const accessToken = req.cookies.get("accessToken")?.value;
   const refreshToken = req.cookies.get("refreshToken")?.value;
   const response = NextResponse.next();
-  console.log(req.url, "reqUrl");
+
+  const isDevelopment = process.env.NODE_ENV === "development";
 
   const refreshTokenString = `refreshToken=${refreshToken};`;
 
@@ -42,8 +43,21 @@ export async function middleware(req: NextRequest) {
 
       if (refreshResponse.ok) {
         const tokens = await refreshResponse.json();
-        response.cookies.set("accessToken", tokens.accessToken);
-        response.cookies.set("refreshToken", tokens.refreshToken);
+        response.cookies.set("accessToken", tokens.accessToken, {
+          httpOnly: true,
+          secure: false,
+          sameSite: "lax",
+          domain: !isDevelopment ? ".job-search-service.ru" : "localhost",
+          maxAge: 15 * 60,
+        });
+
+        response.cookies.set("refreshToken", tokens.refreshToken, {
+          httpOnly: true,
+          secure: false,
+          sameSite: "lax",
+          domain: !isDevelopment ? ".job-search-service.ru" : "localhost",
+          maxAge: 60 * 24 * 60 * 60,
+        });
 
         response.headers.set("x-access-token", tokens.accessToken);
         response.headers.set("x-refresh-token", tokens.refreshToken);
