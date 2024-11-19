@@ -26,4 +26,13 @@
       }
     }
   }
+
+  @media (max-width: 550px) {
+    top: 130%;
+    .popup-content {
+      .popup-close-btn {
+        font-size: 22px;
+      }
+    }
+  }
 }

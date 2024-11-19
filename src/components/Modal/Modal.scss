@@ -44,5 +44,15 @@
     @media (min-width: 1600px) {
       width: 30%;
     }
+
+    @media (max-width: 520px) {
+        padding-left: 20px;
+        padding-right: 20px;
+
+        .modal-login-template {
+          padding-left: 10x;
+          padding-right: 10px;
+        }
+    }
   }
 }

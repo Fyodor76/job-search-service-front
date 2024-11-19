@@ -56,9 +56,29 @@
     }
 
     @media (max-width: 1024px) {
-      flex-wrap: wrap;
+      flex-direction: column;
 
       .main-screen__image-container {
+      }
+    }
+  }
+
+  @media (max-width: 520px) {
+    padding: 5px;
+    height: calc(100vh - 30px);
+
+    .main-screen__container {
+      .main-screen__block-titles {
+        gap: 25px !important;
+        max-width: 100% !important;
+      }
+
+      .main-screen__image-container {
+        height: 65%;
+        .responsive-svg svg {
+          height: 100%;
+          width: 95%;
+        }
       }
     }
   }

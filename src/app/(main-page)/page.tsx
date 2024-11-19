@@ -15,7 +15,7 @@ export default async function Home(): Promise<JSX.Element> {
     <main className="main-container">
       <MainScreen />
       <ServicesScreen />
-      <ClientSideElements elementsData={elementsData} />
+      {/* <ClientSideElements elementsData={elementsData} /> */}
     </main>
   );
 }

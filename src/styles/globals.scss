@@ -26,6 +26,7 @@ body {
   font-weight: 400;
 }
 
+p,
 h1,
 h2,
 h3,
@@ -45,6 +46,7 @@ a {
   font-family: "Raleway", sans-serif;
 }
 
+p,
 button {
   font-weight: 500;
   font-family: "Raleway", sans-serif;
@@ -93,14 +95,26 @@ body {
   border-radius: 10px;
   height: 100%;
   position: relative;
+
+  @media (max-width: 520px) {
+    padding: 5px;
+  }
 }
 
 h1 {
-  font-size: calc(2rem + 3vw); 
+  font-size: calc(2rem + 3vw);
+
+  @media (max-width: 520px) {
+    font-size: calc(1.8rem + 3vw);
+  }
 }
 
 h2 {
-  font-size: calc(1.4rem + 0.7vw);
+  font-size: calc(1.8rem + 0.7vw);
+
+  @media (max-width: 520px) {
+    font-size: calc(0.8rem + 0.7vw);
+  }
 }
 
 h3 {

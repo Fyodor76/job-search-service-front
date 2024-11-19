@@ -142,4 +142,37 @@
       ); // Увеличиваем заголовок для больших экранов
     }
   }
+
+  @media (max-width: 520px) {
+    h2 {
+      font-size: calc(1.8rem + 0.5vw);
+      padding-bottom: 30px;
+      padding-top: 50px;
+    }
+
+    .services-screen__blocks {
+      padding: 5px;
+      flex-direction: column;
+      gap: 20px;
+
+      .services-screen__block {
+        width: 100%;
+        padding: 20px;
+        height: 28vh;
+
+        .services-screen__text {
+          max-width: 80% !important;
+        }
+
+        .services-screen__arrow-block {
+          width: 50px;
+          height: 50px;
+        }
+
+        .services-screen__picture-block {
+          width: 250px;
+        }
+      }
+    }
+  }
 }
