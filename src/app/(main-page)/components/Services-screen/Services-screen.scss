@@ -147,18 +147,19 @@
     h2 {
       font-size: calc(1.8rem + 0.5vw);
       padding-bottom: 30px;
-      padding-top: 50px;
+      padding-top: 40px;
+      max-width: 80%;
     }
 
     .services-screen__blocks {
       padding: 5px;
       flex-direction: column;
-      gap: 20px;
+      gap: 10px;
 
       .services-screen__block {
         width: 100%;
         padding: 20px;
-        height: 28vh;
+        height: 350px;
 
         .services-screen__text {
           max-width: 80% !important;
