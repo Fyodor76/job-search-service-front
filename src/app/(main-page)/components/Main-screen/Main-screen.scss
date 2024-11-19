@@ -55,8 +55,11 @@
       }
     }
 
-    @media (max-width: 550px) {
+    @media (max-width: 1024px) {
       flex-wrap: wrap;
+
+      .main-screen__image-container {
+      }
     }
   }
 }

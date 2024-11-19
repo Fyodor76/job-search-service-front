@@ -1,0 +1,28 @@
+.burger-icon {
+  width: 24px;
+  height: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.burger-icon_open .burger-icon__line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.burger-icon_open .burger-icon__line:nth-child(2) {
+  opacity: 0;
+}
+
+.burger-icon_open .burger-icon__line:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+.burger-icon__line {
+  width: 100%;
+  height: 2px;
+  background-color: #333;
+  transition: all 0.3s ease;
+}

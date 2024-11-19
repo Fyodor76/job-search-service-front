@@ -33,5 +33,9 @@
         font-size: calc(12px + 0.25vw) !important;
       }
     }
+
+    @media (max-width: 1023px) {
+      display: none;
+    }
   }
 }
