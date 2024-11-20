@@ -45,7 +45,7 @@ export async function middleware(req: NextRequest) {
           httpOnly: true,
           secure: !isDevelopment,
           sameSite: "lax",
-          domain: !isDevelopment ? ".job-search-service.ru" : "localhost",
+          domain: !isDevelopment ? process.env.COOKIE_DOMAIN : "localhost",
           maxAge: 15 * 60, // 15 минут для accessToken
         });
 
@@ -53,7 +53,7 @@ export async function middleware(req: NextRequest) {
           httpOnly: true,
           secure: !isDevelopment,
           sameSite: "lax",
-          domain: !isDevelopment ? ".job-search-service.ru" : "localhost",
+          domain: !isDevelopment ? process.env.COOKIE_DOMAIN : "localhost",
           maxAge: 60 * 24 * 60 * 60, // 60 дней для refreshToken
         });
 
