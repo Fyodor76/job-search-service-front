@@ -18,15 +18,19 @@ apiClient.interceptors.response.use(
     // Проверяем, возникла ли ошибка на запросе рефреша токена
     if (originalRequest.url === "/auth/refresh-token") {
       console.log("401 ошибка на рефреш токене");
-      document.cookie =
-        "accessToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-      document.cookie =
-        "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 
-      if (window.location.pathname === "/") {
-        window.location.reload();
-      } else {
-        window.location.href = "/";
+      // Проверка, что код выполняется на клиенте
+      if (typeof window !== "undefined") {
+        document.cookie =
+          "accessToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        document.cookie =
+          "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+
+        if (window.location.pathname === "/") {
+          window.location.reload();
+        } else {
+          window.location.href = "/";
+        }
       }
 
       return Promise.reject(error);

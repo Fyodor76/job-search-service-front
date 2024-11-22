@@ -1,14 +1,13 @@
 import { AxiosResponse } from "axios";
 import { makeRequest } from "./makeRequest";
 
-// Интерфейсы для возвращаемых данных
 interface LogoutResponse {
-  message: string; // Сообщение при успешном logout
+  message: string;
 }
 
 interface RefreshTokenResponse {
-  accessToken: string; // Новый Access Token
-  refreshToken: string; // Новый Refresh Token
+  accessToken: string;
+  refreshToken: string;
 }
 
 export const AuthServices = {

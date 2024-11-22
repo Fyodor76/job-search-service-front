@@ -21,8 +21,7 @@ const BlockLoginClient: React.FC<BlockLoginClientProps> = ({ isAuth }) => {
 
   const logout = async () => {
     try {
-      const response = await AuthServices.logout();
-      console.log(response.data, "response");
+      await AuthServices.logout();
       window.location.reload();
     } catch (e) {
       console.log(e);
