@@ -1,4 +1,5 @@
 import { baseUrl } from "@/const/baseUrl";
+import { AuthServices } from "@/services/auth";
 import axios from "axios";
 
 export const apiClient = axios.create({
@@ -40,14 +41,7 @@ apiClient.interceptors.response.use(
 
       try {
         console.log("Попытка рефреша токена...");
-        const refreshResponse = await apiClient.post(
-          "/auth/refresh-token",
-          null,
-          {
-            withCredentials: true,
-          },
-        );
-
+        const refreshResponse = await AuthServices.refreshTokenClient();
         if (refreshResponse.status !== 401) {
           return apiClient(originalRequest);
         }

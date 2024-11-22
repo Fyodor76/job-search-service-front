@@ -19,6 +19,16 @@ const BlockLoginClient: React.FC<BlockLoginClientProps> = ({ isAuth }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isPopupOpen, setPopupOpen] = useState(false);
 
+  const logout = async () => {
+    try {
+      const response = await AuthServices.logout();
+      console.log(response.data, "response");
+      window.location.reload();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
@@ -40,7 +50,7 @@ const BlockLoginClient: React.FC<BlockLoginClientProps> = ({ isAuth }) => {
       <Popup isOpen={isPopupOpen} onClose={closePopup}>
         <div className={b("popup-block")}>
           <p>Профиль</p>
-          <p onClick={AuthServices.logout}>Выйти</p>
+          <p onClick={logout}>Выйти</p>
         </div>
       </Popup>
     </div>

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 import { baseUrl } from "./const/baseUrl";
+import { AuthServices } from "./services/auth";
 
 export async function middleware(req: NextRequest) {
   const accessToken = req.cookies.get("accessToken")?.value;
@@ -10,7 +11,7 @@ export async function middleware(req: NextRequest) {
   const isDevelopment = process.env.NODE_ENV === "development";
   const refreshTokenString = `refreshToken=${refreshToken};`;
 
-  const userAgent = req.headers.get("user-agent");
+  const userAgent = req.headers.get("user-agent") || "";
 
   // 1. Проверка accessToken на валидность
   if (accessToken) {
@@ -27,18 +28,13 @@ export async function middleware(req: NextRequest) {
   // 2. Если accessToken невалиден, пробуем обновить с помощью refreshToken
   if (refreshToken) {
     try {
-      const refreshResponse = await fetch(`${baseUrl}/auth/refresh-token`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Cookie: refreshTokenString,
-          "User-Agent": userAgent || "unknown",
-        },
-        credentials: "include",
-      });
+      const refreshResponse = await AuthServices.refreshTokenServer(
+        refreshTokenString,
+        userAgent,
+      );
 
-      if (refreshResponse.ok) {
-        const tokens = await refreshResponse.json();
+      if (refreshResponse.status === 200) {
+        const tokens = refreshResponse.data;
 
         // Сохраняем новые токены в cookies
         response.cookies.set("accessToken", tokens.accessToken, {

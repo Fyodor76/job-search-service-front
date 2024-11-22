@@ -1,20 +1,39 @@
+import { AxiosResponse } from "axios";
 import { makeRequest } from "./makeRequest";
 
+// Интерфейсы для возвращаемых данных
+interface LogoutResponse {
+  message: string; // Сообщение при успешном logout
+}
+
+interface RefreshTokenResponse {
+  accessToken: string; // Новый Access Token
+  refreshToken: string; // Новый Refresh Token
+}
+
 export const AuthServices = {
-  logout: async () => {
-    try {
-      const data = await makeRequest<{ message: string }>(
-        "/auth/logout",
-        "POST",
-      );
+  logout: async (): Promise<AxiosResponse<LogoutResponse>> => {
+    return await makeRequest<LogoutResponse>("/auth/logout", "POST");
+  },
 
-      console.log("Logout successful:", data);
+  refreshTokenServer: async (
+    refreshTokenString: string,
+    userAgent: string,
+  ): Promise<AxiosResponse<RefreshTokenResponse>> => {
+    return await makeRequest<RefreshTokenResponse>(
+      `/auth/refresh-token`,
+      "POST",
+      null,
+      {
+        headers: {
+          Cookie: refreshTokenString,
+          "User-Agent": userAgent || "unknown",
+        },
+      },
+    );
+  },
 
-      window.location.reload();
-      return data;
-    } catch (error) {
-      console.error("Logout error:", error);
-      throw error;
-    }
+  refreshTokenClient: async (): Promise<AxiosResponse<void>> => {
+    return await makeRequest<void>(`/auth/refresh-token`, "POST");
   },
 };
