@@ -50,6 +50,8 @@ const ModalLoginTemplate: FC<ModalLoginTemplateProps> = ({
     setValue("email", "");
   };
 
+  console.log(errors.termsAccepted, "erros");
+
   return (
     <div className={b()}>
       <h5 className={b("title")}>Войдите в аккаунт</h5>
@@ -99,7 +101,11 @@ const ModalLoginTemplate: FC<ModalLoginTemplateProps> = ({
         <Checkbox
           id="termsCheckbox"
           label={
-            <p>
+            <p
+              style={{
+                color: errors.termsAccepted ? "red" : "inherit",
+              }}
+            >
               Авторизируясь в Системе, вы подтверждаете, что принимаете условия{" "}
               <a href="/terms" target="_blank" rel="noopener noreferrer">
                 Пользовательского соглашения

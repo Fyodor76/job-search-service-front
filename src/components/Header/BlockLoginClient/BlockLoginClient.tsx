@@ -7,7 +7,6 @@ import block from "bem-cn-lite";
 const b = block("header");
 
 const Modal = dynamic(() => import("@/components/Modal/Modal"), { ssr: false });
-import ModalLoginTemplate from "@/templates/ModalLoginTemplate/ModalLoginTemplate";
 import Popup from "@/components/Popup/Popup";
 import { AuthServices } from "@/services/auth";
 import ModalAuthFlow from "../ModalAuthFlow/ModalAuthFlow";
