@@ -37,7 +37,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     return null;
   }
 
-  return ReactDOM.createPortal(
+  return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
@@ -59,8 +59,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>,
-    document.body,
+    </AnimatePresence>
   );
 };
 

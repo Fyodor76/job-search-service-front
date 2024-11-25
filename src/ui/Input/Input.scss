@@ -3,10 +3,12 @@
 .input-wrapper {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .input-container {
   position: relative;
+  width: 100%;
 }
 
 .input {
@@ -14,7 +16,7 @@
   padding-right: 30px;
   font-size: 14px;
   color: $color-dark;
-  border: 1px solid $color-light-gray; // Рамка по умолчанию
+  border: 1px solid $color-light-gray;
   border-radius: 5px;
   width: 100%;
   transition:
@@ -29,15 +31,14 @@
     transform: translateY(-50%);
     display: flex;
     align-items: center;
-    color: $color-text-light; // Цвет иконки
+    color: $color-text-light;
     cursor: pointer;
 
     &:hover {
-      color: $color-dark; // Цвет при наведении
+      color: $color-dark;
     }
   }
 
-  // Настройка по размеру с использованием data-size
   &[data-size="small"] {
     padding: 8px;
     font-size: 12px;
@@ -53,50 +54,48 @@
     font-size: 16px;
   }
 
-  // Стилизация при полном размере
   &[data-full-width="true"] {
     width: 100%;
   }
 
-  // Стилизация при disabled
   &[data-disabled="true"] {
     opacity: 0.5;
     cursor: not-allowed;
     border-color: $color-text-light;
     transition:
-      border-color 0.8s ease,
-      opacity 0.8s ease;
+      opacity 0.8s ease,
+      border-color 0.8s ease;
 
     &:hover {
       opacity: 0.7;
     }
   }
 
-  // Стилизация при ошибке
   &[data-error="true"] {
     border-color: red;
-    transition: border-color 0.8s ease;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+    transition:
+      border-color 0.8s ease,
+      box-shadow 0.8s ease;
   }
 
-  // Эффект при наведении
   &:hover {
     border-color: $color-dark;
   }
 
-  // Эффект при фокусе
   &:focus {
     outline: none;
-    border-color: $color-dark; // Тёмный цвет для фокуса
+    border-color: $color-dark;
+    box-shadow: 0 0 5px rgba($color-dark, 0.2);
   }
 
-  // Эффект при активации (клик)
   &:active {
     background-color: $color-light;
   }
 }
 
 .input-error {
-  color: $color-dark;
+  color: red;
   font-size: 12px;
   margin-top: 5px;
 }

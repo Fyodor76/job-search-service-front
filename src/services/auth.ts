@@ -32,7 +32,18 @@ export const AuthServices = {
     );
   },
 
+  sendEmail: async (email: string): Promise<AxiosResponse<void>> => {
+    return await makeRequest<void>(`/auth/send-otp`, "POST", { email });
+  },
+
   refreshTokenClient: async (): Promise<AxiosResponse<void>> => {
     return await makeRequest<void>(`/auth/refresh-token`, "POST");
+  },
+
+  verifyOtp: async (
+    email: string,
+    otp: string,
+  ): Promise<AxiosResponse<void>> => {
+    return await makeRequest<void>(`/auth/verify-otp`, "POST", { email, otp });
   },
 };

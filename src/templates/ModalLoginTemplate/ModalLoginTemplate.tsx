@@ -1,33 +1,49 @@
-import React from "react";
+import React, { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import block from "bem-cn-lite";
 import Button from "@/ui/Button/Button";
 import { GoogleIcon } from "@/svg/GoogleIcon";
 import { TelegramIcon } from "@/svg/TelegramIcon";
 import { YandexIcon } from "@/svg/YandexIcon";
-import Input from "@/ui/Input/Input";
 import ClearIcon from "@/svg/ClearIcon";
 import Checkbox from "@/ui/Checkbox/Checkbox";
 import Link from "next/link";
 import { baseUrl } from "@/const/baseUrl";
+import InputFieldWithForm from "@/ui/Input/InputFieldWithForm";
+import { AuthServices } from "@/services/auth";
 
 interface FormData {
   email: string;
   termsAccepted: boolean;
 }
 
+interface ModalLoginTemplateProps {
+  setCodeScreenHandler: (email: string) => void;
+}
+
 const b = block("modal-login-template");
 
-const ModalLoginTemplate: React.FC = () => {
+const ModalLoginTemplate: FC<ModalLoginTemplateProps> = ({
+  setCodeScreenHandler,
+}) => {
   const {
     control,
     handleSubmit,
     formState: { errors },
     setValue,
   } = useForm<FormData>();
+  const [isLoading, setLoading] = useState<boolean>(false);
 
-  const onSubmit = (data: FormData) => {
-    console.log("Submitted email:", data);
+  const onSubmit = async ({ email }: FormData) => {
+    try {
+      setLoading(true);
+      const res = await AuthServices.sendEmail(email);
+      setCodeScreenHandler(email);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const clearEmail = () => {
@@ -39,7 +55,7 @@ const ModalLoginTemplate: React.FC = () => {
       <h5 className={b("title")}>Войдите в аккаунт</h5>
       <p className={b("subtitle")}>Введите свою электронную почту</p>
       <form onSubmit={handleSubmit(onSubmit)} className={b("form")}>
-        <Input
+        <InputFieldWithForm
           type="email"
           placeholder="example@mail.com"
           size="medium"
@@ -58,7 +74,9 @@ const ModalLoginTemplate: React.FC = () => {
         <p className={b("modal-subtext")}>
           Найдем вас в системе или зарегистрируем
         </p>
-        <Button isFullWidth>Войти</Button>
+        <Button isFullWidth loading={isLoading}>
+          Войти
+        </Button>
       </form>
       <p className={b("other-methods")}>Или используйте другие способы</p>
       <div className={b("auth-icons")}>

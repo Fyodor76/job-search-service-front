@@ -1,22 +1,25 @@
 import React from "react";
-import { useController, Control } from "react-hook-form";
-import cn from "classnames";
+import { Control } from "react-hook-form";
 import "./Input.scss";
+import InputFieldWithForm from "./InputFieldWithForm";
+import InputField from "./InputField";
 
 interface InputProps {
-  type: "text" | "email" | "password" | "number";
+  type: "text" | "email" | "password" | "number" | "tel" | "date" | "textarea";
   placeholder?: string;
   size?: "small" | "medium" | "large";
   disabled?: boolean;
   error?: string;
   className?: string;
   isFullWidth?: boolean;
-  name: string;
+  name: string; // Имя обязательно для работы с useController
   required?: boolean;
-  pattern?: string;
   icon?: React.ReactNode;
-  control: Control<any>;
+  control?: Control<any>; // Параметр для использования с react-hook-form
   rules?: object;
+  onChange?: (value: string) => void; // Обычный onChange
+  value?: string;
+  maxLength?: number;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -28,50 +31,53 @@ const Input: React.FC<InputProps> = ({
   isFullWidth,
   name,
   required = false,
-  pattern,
   icon,
   control,
   rules,
+  onChange,
+  error,
+  value,
+  maxLength,
 }) => {
-  const {
-    field: { value, onChange, onBlur, ref },
-    fieldState: { error: fieldError },
-  } = useController({
-    name,
-    control,
-    rules,
-    defaultValue: "",
-  });
+  const isControlled = Boolean(control);
 
-  return (
-    <div className={cn("input-wrapper", className)}>
-      <div className="input-container">
-        <input
-          type={type}
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}
-          onBlur={onBlur}
-          ref={ref}
-          name={name}
-          required={required}
-          pattern={pattern}
-          data-size={size} // data-атрибут для размера
-          data-full-width={isFullWidth ? "true" : "false"} // data-атрибут для ширины
-          data-disabled={disabled ? "true" : "false"} // data-атрибут для состояния disabled
-          data-error={fieldError ? "true" : "false"} // data-атрибут для ошибки
-          className={cn("input", {
-            "input--error": fieldError,
-            "input--disabled": disabled,
-            "input--full-width": isFullWidth,
-          })}
-          disabled={disabled}
-        />
-        {icon && value && <span className="input-icon">{icon}</span>}{" "}
-      </div>
-      {fieldError && <div className="input-error">{fieldError.message}</div>}
-    </div>
+  return isControlled ? (
+    <InputFieldWithForm
+      {...{
+        type,
+        placeholder,
+        size,
+        disabled,
+        className,
+        isFullWidth,
+        name,
+        required,
+        icon,
+        control,
+        rules,
+        onChange,
+        value,
+        maxLength,
+        error,
+      }}
+    />
+  ) : (
+    <InputField
+      {...{
+        type,
+        placeholder,
+        size,
+        disabled,
+        className,
+        isFullWidth,
+        name,
+        required,
+        icon,
+        onChange,
+        value,
+        maxLength,
+        error,
+      }}
+    />
   );
 };
-
-export default Input;

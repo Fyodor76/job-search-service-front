@@ -1,6 +1,7 @@
 import React from "react";
 import cn from "classnames";
 import "./Button.scss";
+import Loader from "@/components/Loader/Loader";
 
 interface ButtonProps {
   onClick?: () => void;
@@ -33,7 +34,11 @@ const Button: React.FC<ButtonProps> = ({
       className={cn("button", className)}
       disabled={disabled || loading}
     >
-      {loading ? "Loading..." : children || "Button"}
+      {loading ? (
+        <Loader position="static" width="28px" height="28px" />
+      ) : (
+        children || "Button"
+      )}
     </button>
   );
 };

@@ -14,7 +14,6 @@
   .modal-content {
     background-color: $color-white;
     padding: 40px;
-    padding-bottom: 20px;
     border-radius: 8px;
     width: 480px;
     max-width: 90%;
@@ -46,13 +45,13 @@
     }
 
     @media (max-width: 520px) {
-        padding-left: 20px;
-        padding-right: 20px;
+      padding-left: 20px;
+      padding-right: 20px;
 
-        .modal-login-template {
-          padding-left: 10x;
-          padding-right: 10px;
-        }
+      .modal-login-template {
+        padding-left: 10x;
+        padding-right: 10px;
+      }
     }
   }
 }

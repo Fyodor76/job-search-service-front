@@ -7,6 +7,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 
   &:hover {
     opacity: 0.9;
@@ -15,6 +16,10 @@
   &[data-size="small"] {
     width: 80px;
     height: 32px;
+  }
+
+  &[data-position="static"] {
+    position: static;
   }
 
   &[data-size="medium"] {

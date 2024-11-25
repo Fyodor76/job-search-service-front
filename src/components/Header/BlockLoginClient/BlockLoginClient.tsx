@@ -10,6 +10,8 @@ const Modal = dynamic(() => import("@/components/Modal/Modal"), { ssr: false });
 import ModalLoginTemplate from "@/templates/ModalLoginTemplate/ModalLoginTemplate";
 import Popup from "@/components/Popup/Popup";
 import { AuthServices } from "@/services/auth";
+import ModalAuthFlow from "../ModalAuthFlow/ModalAuthFlow";
+import Portal from "@/components/Portal/Portal";
 
 interface BlockLoginClientProps {
   isAuth: boolean;
@@ -42,9 +44,11 @@ const BlockLoginClient: React.FC<BlockLoginClientProps> = ({ isAuth }) => {
         <div className={b("profile_client")} onClick={handlePopup}></div>
       )}
 
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <ModalLoginTemplate />
-      </Modal>
+      <Portal containerSelector=".modal-container">
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          <ModalAuthFlow />
+        </Modal>
+      </Portal>
 
       <Popup isOpen={isPopupOpen} onClose={closePopup}>
         <div className={b("popup-block")}>
