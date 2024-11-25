@@ -99,6 +99,18 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
     }
   };
 
+  const sendEmail = async () => {
+    try {
+      setLoading(true);
+      const res = await AuthServices.sendEmail(email);
+      console.log(res, "send email again");
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className={b()}>
       <Portal containerSelector=".modal-content">
@@ -149,7 +161,7 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
         {!resendTimer ? (
           <span className={b("resend-info-link")}>
             Не получили код?{" "}
-            <span className={b("resend-info-link-click")} onClick={resendCode}>
+            <span className={b("resend-info-link-click")} onClick={sendEmail}>
               Нажмите здесь
             </span>
           </span>

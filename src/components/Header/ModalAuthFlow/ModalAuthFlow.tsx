@@ -21,6 +21,9 @@ const ModalAuthFlow: React.FC = () => {
     setCodeScreen({ isCodeScreen: true, email: email });
   };
 
+  const setEmailScreenHandler = () =>
+    setCodeScreen({ isCodeScreen: false, email: "" });
+
   return (
     <div
       className={b()}
@@ -46,7 +49,10 @@ const ModalAuthFlow: React.FC = () => {
           }}
         >
           {codeScreen.isCodeScreen ? (
-            <CodeVerificationTemplate email={codeScreen.email} />
+            <CodeVerificationTemplate
+              onBack={setEmailScreenHandler}
+              email={codeScreen.email}
+            />
           ) : (
             <ModalLoginTemplate setCodeScreenHandler={setCodeScreenHandler} />
           )}

@@ -74,7 +74,7 @@ const ModalLoginTemplate: FC<ModalLoginTemplateProps> = ({
         <p className={b("modal-subtext")}>
           Найдем вас в системе или зарегистрируем
         </p>
-        <Button isFullWidth loading={isLoading}>
+        <Button isFullWidth loading={isLoading} type="submit">
           Войти
         </Button>
       </form>
