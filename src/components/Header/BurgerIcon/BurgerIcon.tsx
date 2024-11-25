@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import block from "bem-cn-lite";
+import { Sidebar } from "../Sidebar/Sidebar";
 
 const b = block("burger-icon");
 
@@ -13,18 +14,21 @@ const BurgerIcon: React.FC<BurgerIconProps> = ({ onClick }) => {
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
-    if (onClick) onClick(); // Вызов внешней функции, если она передана
+    if (onClick) onClick();
   };
 
   return (
-    <div
-      className={b({ open: isOpen })} // Добавление модификатора open, если состояние true
-      onClick={toggleMenu}
-    >
-      <div className={b("line")}></div>
-      <div className={b("line")}></div>
-      <div className={b("line")}></div>
-    </div>
+    <>
+      <div
+        className={b({ open: isOpen })} // Добавление модификатора open, если состояние true
+        onClick={toggleMenu}
+      >
+        <div className={b("line")}></div>
+        <div className={b("line")}></div>
+        <div className={b("line")}></div>
+      </div>
+      <Sidebar isOpen={isOpen} onClose={toggleMenu} />
+    </>
   );
 };
 
