@@ -7,7 +7,6 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  position: absolute;
 }
 
 .code-verification-template__title {
@@ -27,7 +26,7 @@
 
 .code-verification-template__icon-back {
   position: absolute;
-  top: 5px;
+  top: 10px;
   left: 10px;
   cursor: pointer;
 

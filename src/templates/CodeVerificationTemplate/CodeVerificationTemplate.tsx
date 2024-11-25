@@ -105,6 +105,7 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
     try {
       setLoading(true);
       const res = await AuthServices.sendEmail(email);
+      resendCode();
       console.log(res, "send email again");
     } catch (e) {
       console.log(e);
@@ -168,7 +169,11 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
             </span>
           </span>
         ) : (
-          `Отправить код повторно можно через ${resendTimer} сек.`
+          <>
+            <span>Новый код отправлен :) </span>
+            <br />
+            <span> Повторить попытку можно через {resendTimer} секунд</span>
+          </>
         )}
       </p>
     </div>

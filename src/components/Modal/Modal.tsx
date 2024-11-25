@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import ReactDOM from "react-dom";
+import { CrossIcon } from "@/svg/CrossIcon";
 
 interface ModalProps {
   isOpen: boolean;
@@ -53,7 +53,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
             onClick={(e) => e.stopPropagation()}
           >
             <button className="modal-close-btn" onClick={handleClose}>
-              &times;
+              <CrossIcon />
             </button>
             {children}
           </motion.div>

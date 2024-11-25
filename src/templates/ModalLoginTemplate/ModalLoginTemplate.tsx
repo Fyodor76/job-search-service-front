@@ -50,8 +50,6 @@ const ModalLoginTemplate: FC<ModalLoginTemplateProps> = ({
     setValue("email", "");
   };
 
-  console.log(errors.termsAccepted, "erros");
-
   return (
     <div className={b()}>
       <h5 className={b("title")}>Войдите в аккаунт</h5>
