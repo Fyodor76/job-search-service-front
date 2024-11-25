@@ -10,8 +10,8 @@ export const CrossIcon = () => {
       <path
         d="M7.00008 6.99996L12.8334 12.8333M7.00008 6.99996L1.16675 1.16663M7.00008 6.99996L1.16675 12.8333M7.00008 6.99996L12.8334 1.16663"
         stroke="#2F2F2F"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

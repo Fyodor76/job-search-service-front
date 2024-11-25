@@ -78,7 +78,9 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
     setValue("code", updatedValues);
 
     if (value && index < 5) {
+      const currentInput = document.getElementById(`code-input-${index}`);
       const nextInput = document.getElementById(`code-input-${index + 1}`);
+      if (currentInput) (nextInput as HTMLInputElement).blur();
       if (nextInput) (nextInput as HTMLInputElement).focus();
     }
   };

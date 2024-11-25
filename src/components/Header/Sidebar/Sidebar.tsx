@@ -6,6 +6,8 @@ import { InstagramIcon } from "@/svg/InstagramIcon";
 import { VkIcon } from "@/svg/VkIcon";
 import { CrossIcon } from "@/svg/CrossIcon";
 import { TelegramIconSidebar } from "@/svg/TelegramIconSidebar";
+import { menu } from "@/const/menu";
+import { usePathname } from "next/navigation";
 
 const b = block("sidebar");
 
@@ -15,6 +17,8 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
+  const pathname = usePathname();
+
   return (
     <>
       <AnimatePresence>
@@ -45,12 +49,19 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                 <CrossIcon />
               </button>
               <ul className={b("menu")}>
-                <li>Главная</li>
-                <li>Создание резюме</li>
-                <li>Консультация HR</li>
-                <li>Лендинг</li>
-                <li>FAQ</li>
-                <li>Контакты</li>
+                {menu.map((item) => {
+                  const isActive = pathname === item.href;
+
+                  return (
+                    <li
+                      key={item.title}
+                      className={b("menu-item", { active: isActive })}
+                    >
+                      <div className={b("menu-item-icon")}>{item.icon}</div>
+                      <div>{item.title}</div>
+                    </li>
+                  );
+                })}
               </ul>
               <div className={b("contacts")}>
                 <div>
