@@ -57,7 +57,7 @@ const InputField = forwardRef<
         <div className="input-container">
           {type === "textarea" ? (
             <textarea
-              ref={ref as React.Ref<HTMLTextAreaElement>} // Передаем ref
+              ref={ref as React.Ref<HTMLTextAreaElement>}
               placeholder={placeholder}
               value={value}
               onChange={handleChange}
@@ -77,7 +77,7 @@ const InputField = forwardRef<
             />
           ) : (
             <input
-              ref={ref as React.Ref<HTMLInputElement>} // Передаем ref
+              ref={ref as React.Ref<HTMLInputElement>}
               type={type}
               placeholder={placeholder}
               value={value}
