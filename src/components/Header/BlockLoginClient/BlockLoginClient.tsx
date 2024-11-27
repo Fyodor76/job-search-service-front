@@ -43,6 +43,9 @@ const BlockLoginClient: React.FC<BlockLoginClientProps> = ({
   const isRendered = currentScreen !== screen;
   const ref = useRef(false);
 
+  console.log(currentScreen, "currentScreen");
+  console.log(screen, "screen");
+
   useEffect(() => {
     if (!ref.current && isRendered) {
       const hasChatId = hasChatIdSessionStorage(chatId || "");

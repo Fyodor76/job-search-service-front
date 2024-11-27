@@ -63,6 +63,12 @@
     }
   }
 
+  @media (max-width: 1023px) {
+    .main-screen__image-container {
+      height: 60% !important;
+    }
+  }
+
   @media (max-width: 520px) {
     padding: 5px;
     height: calc(100vh - 30px);

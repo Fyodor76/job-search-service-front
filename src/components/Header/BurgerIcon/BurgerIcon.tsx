@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import block from "bem-cn-lite";
-import { Sidebar } from "../Sidebar/Sidebar";
 import Portal from "@/components/Portal/Portal";
+import { Sidebar } from "@/components/Sidebar/Sidebar";
 
 const b = block("burger-icon");
 
