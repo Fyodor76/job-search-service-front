@@ -40,20 +40,18 @@ const BlockLoginClient: React.FC<BlockLoginClientProps> = ({
   const { screen: currentScreen } = useScreenSize();
   const searchParams = useSearchParams();
   const chatId = searchParams.get("chatId");
-  const isRendered = currentScreen !== screen;
-  const ref = useRef(false);
-
-  console.log(currentScreen, "currentScreen");
-  console.log(screen, "screen");
+  const isRendered = currentScreen === screen;
+  const isFirstRender = useRef(false);
 
   useEffect(() => {
-    if (!ref.current && isRendered) {
-      const hasChatId = hasChatIdSessionStorage(chatId || "");
-      console.log(hasChatId);
-      setModalOpen(!!chatId && !hasChatId);
-      ref.current = true;
+    if (currentScreen) {
+      if (!isFirstRender.current && isRendered) {
+        const hasChatId = hasChatIdSessionStorage(chatId || "");
+        console.log(hasChatId);
+        setModalOpen(!!chatId && !hasChatId);
+      }
     }
-  }, []);
+  }, [currentScreen]);
 
   const logout = async () => {
     try {
@@ -70,7 +68,7 @@ const BlockLoginClient: React.FC<BlockLoginClientProps> = ({
   const handlePopup = () => setPopupOpen((prev) => !prev);
   const closePopup = () => setPopupOpen(false);
 
-  return screen === currentScreen ? (
+  return isRendered ? (
     <div>
       {!isAuth ? (
         <div className={b("block_login_client")} onClick={openModal}></div>

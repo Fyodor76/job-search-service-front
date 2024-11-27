@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const useScreenSize = () => {
   const [screenSize, setScreenSize] = useState({
-    screen: "mobile", // начальный тип устройства
+    screen: "", // начальный тип устройства
     width: 0, // начальная ширина экрана, 0, так как на сервере ее нет
   });
 
