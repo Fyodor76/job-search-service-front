@@ -17,9 +17,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <Script src="/scripts/addCircleBehindElement.js" type="module" defer />
-      </head>
       <body>
         <div className={b()}>{children}</div>
       </body>

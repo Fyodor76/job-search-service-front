@@ -5,14 +5,14 @@ import block from "bem-cn-lite";
 
 const b = block("header");
 
-const BlockLogin: React.FC = async () => {
+const BlockLogin: React.FC<{screen: string}> = async ({screen}) => {
   const { isAuth } = await checkAuth();
 
   return (
     <div className={b("block_login")}>
       <BlockLoginServer isAuth={isAuth} />
 
-      <BlockLoginClient isAuth={isAuth} />
+      <BlockLoginClient isAuth={isAuth} screen={screen}/>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 interface PortalProps {
   children: ReactNode;
-  containerSelector?: string; // CSS-селектор для контейнера
+  containerSelector?: string;  
 }
 
 const Portal: React.FC<PortalProps> = ({ children, containerSelector }) => {
@@ -21,7 +21,6 @@ const Portal: React.FC<PortalProps> = ({ children, containerSelector }) => {
     if (!targetContainer) {
       targetContainer = document.body;
     }
-
     setContainer(targetContainer);
   }, [containerSelector]);
 

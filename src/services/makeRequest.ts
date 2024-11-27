@@ -20,6 +20,6 @@ export const makeRequest = async <T>(
     if (error instanceof AxiosError && error.response?.status === 401) {
       console.warn("401 Unauthorized ignored");
     }
-    throw error; // Пробрасываем остальные ошибки
+    throw error; 
   }
 };

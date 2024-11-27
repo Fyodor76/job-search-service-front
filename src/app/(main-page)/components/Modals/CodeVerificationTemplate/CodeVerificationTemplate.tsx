@@ -7,12 +7,13 @@ import { ArrowLeftIcon } from "@/svg/ArrowLeftIcon";
 import InputField from "@/ui/Input/InputField";
 import Portal from "@/components/Portal/Portal";
 import { AuthServices } from "@/services/auth";
-
+import { useRouter } from 'next/navigation';
 const b = block("code-verification-template");
 
 interface CodeVerificationTemplateProps {
   onBack: () => void;
-  email: string;
+  email?: string;
+  chatId?: string;
 }
 
 interface FormData {
@@ -21,7 +22,8 @@ interface FormData {
 
 const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
   onBack,
-  email,
+  email = '',
+  chatId = ''
 }) => {
   const { control, handleSubmit, setValue, watch } = useForm<FormData>({
     defaultValues: {
@@ -32,6 +34,7 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
   const [resendTimer, setResendTimer] = useState<number | null>(null);
   const [isLoading, setLoading] = useState<boolean>(false);
   const codeValues = watch("code");
+  const router = useRouter()
 
   useEffect(() => {
     const savedTime = localStorage.getItem("resendTime");
@@ -87,17 +90,23 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
         nextInput.focus();
         nextInput.setSelectionRange(0, 0);
       }
+
+      if (currentInput) {
+        currentInput.blur()
+      }
     }
   };
 
   const handleFormSubmit = async () => {
+    console.log(chatId, 'chatId')
     try {
       setLoading(true);
-      const code = codeValues.join("");
-      if (code.length === 6) {
-        const res = await AuthServices.verifyOtp(email, code);
+      const otp = codeValues.join("");
+      if (otp.length === 6) {
+        const res = await AuthServices.verifyOtp({email, chatId, otp});
         console.log(res, "Verification successful");
-        window.location.reload();
+        router.push('/')
+        router.refresh()
       }
     } catch (error) {
       console.error("Verification failed", error);

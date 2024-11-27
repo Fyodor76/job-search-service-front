@@ -1,22 +1,28 @@
 import React, { useState } from "react";
-import ModalLoginTemplate from "@/templates/ModalLoginTemplate/ModalLoginTemplate";
-import CodeVerificationTemplate from "@/templates/CodeVerificationTemplate/CodeVerificationTemplate";
 import block from "bem-cn-lite";
 import { AnimatePresence, motion } from "framer-motion";
+import CodeVerificationTemplate from "../CodeVerificationTemplate/CodeVerificationTemplate";
+import ModalLoginTemplate from "../ModalLoginTemplate/ModalLoginTemplate";
 
 const b = block("modal-auth-flow");
+
+interface ModalAuthFlowProps {
+  chatId: string;
+}
 
 interface CodeScreen {
   isCodeScreen: boolean;
   email: string;
+  chatId?: string;
 }
 
-const ModalAuthFlow: React.FC = () => {
+const ModalAuthFlow: React.FC<ModalAuthFlowProps> = ({chatId}) => {
   const [codeScreen, setCodeScreen] = useState<CodeScreen>({
-    isCodeScreen: false,
+    isCodeScreen: !!chatId,
     email: "",
+    chatId: chatId,
   });
-
+  
   const setCodeScreenHandler = (email: string) => {
     setCodeScreen({ isCodeScreen: true, email: email });
   };
@@ -52,6 +58,7 @@ const ModalAuthFlow: React.FC = () => {
             <CodeVerificationTemplate
               onBack={setEmailScreenHandler}
               email={codeScreen.email}
+              chatId={chatId}
             />
           ) : (
             <ModalLoginTemplate setCodeScreenHandler={setCodeScreenHandler} />

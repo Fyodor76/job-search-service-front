@@ -12,12 +12,12 @@ interface InputProps {
   error?: string;
   className?: string;
   isFullWidth?: boolean;
-  name: string; // Имя обязательно для работы с useController
+  name: string; 
   required?: boolean;
   icon?: React.ReactNode;
-  control?: Control<any>; // Параметр для использования с react-hook-form
+  control?: Control<any>; 
   rules?: object;
-  onChange?: (value: string) => void; // Обычный onChange
+  onChange?: (value: string) => void; 
   value?: string;
   maxLength?: number;
 }

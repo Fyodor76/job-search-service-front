@@ -10,6 +10,12 @@ interface RefreshTokenResponse {
   refreshToken: string;
 }
 
+interface VerifyOtpType {
+  email?: string;
+  otp: string;
+  chatId: string;
+}
+
 export const AuthServices = {
   logout: async (): Promise<AxiosResponse<LogoutResponse>> => {
     return await makeRequest<LogoutResponse>("/auth/logout", "POST");
@@ -40,10 +46,7 @@ export const AuthServices = {
     return await makeRequest<void>(`/auth/refresh-token`, "POST");
   },
 
-  verifyOtp: async (
-    email: string,
-    otp: string,
-  ): Promise<AxiosResponse<void>> => {
-    return await makeRequest<void>(`/auth/verify-otp`, "POST", { email, otp });
+  verifyOtp: async ({email = '', chatId = '', otp}: VerifyOtpType): Promise<AxiosResponse<void>> => {
+    return await makeRequest<void>(`/auth/verify-otp`, "POST", { email, otp, chatId });
   },
 };
