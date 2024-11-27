@@ -11,7 +11,6 @@ const BlockLogin: React.FC<{screen: string}> = async ({screen}) => {
   return (
     <div className={b("block_login")}>
       <BlockLoginServer isAuth={isAuth} />
-
       <BlockLoginClient isAuth={isAuth} screen={screen}/>
     </div>
   );

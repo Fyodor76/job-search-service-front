@@ -17,7 +17,7 @@ const Header: React.FC = () => {
         </div>
         <Logotype className={b("logotype")} />
         <Menu className={b("menu")} />
-        <BlockLogin screen="mobile"/>
+        {/* <BlockLogin screen="mobile"/> */}
       </div>
       <div className={b("block-login-container")}>
         <BlockLogin screen="desktop"/>

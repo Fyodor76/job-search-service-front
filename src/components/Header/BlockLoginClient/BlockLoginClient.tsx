@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import block from "bem-cn-lite";
 
@@ -19,26 +19,38 @@ interface BlockLoginClientProps {
 }
 
 const hasChatIdSessionStorage = (chatId: string): boolean => {
-  if (typeof window === "undefined") return false; 
+  if (typeof window === "undefined") return false;
 
   const chatIdFromSSt = sessionStorage.getItem("chatId");
 
-  if (chatIdFromSSt === chatId) return false
-  if (chatIdFromSSt) return false;
+  if (chatIdFromSSt === chatId) return true;
+  if (!chatId) return true;
 
-  console.log(chatIdFromSSt, 'hasChidID')
+  console.log(chatIdFromSSt, "hasChidID");
   sessionStorage.setItem("chatId", chatId);
-  return true;
+  return false;
 };
 
-const BlockLoginClient: React.FC<BlockLoginClientProps> = ({ isAuth, screen }) => {
+const BlockLoginClient: React.FC<BlockLoginClientProps> = ({
+  isAuth,
+  screen,
+}) => {
   const [isPopupOpen, setPopupOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const { screen: currentScreen } = useScreenSize();
   const searchParams = useSearchParams();
   const chatId = searchParams.get("chatId");
-  const [isModalOpen, setModalOpen] = useState(!!chatId);
-  const { screen: currentScreen } = useScreenSize();
+  const isRendered = currentScreen !== screen;
+  const ref = useRef(false);
 
-  console.log(isModalOpen, 'isModalOpen')
+  useEffect(() => {
+    if (!ref.current && isRendered) {
+      const hasChatId = hasChatIdSessionStorage(chatId || "");
+      console.log(hasChatId);
+      setModalOpen(!!chatId && !hasChatId);
+      ref.current = true;
+    }
+  }, []);
 
   const logout = async () => {
     try {
@@ -48,15 +60,15 @@ const BlockLoginClient: React.FC<BlockLoginClientProps> = ({ isAuth, screen }) =
       console.log(e);
     }
   };
- 
+
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
   const handlePopup = () => setPopupOpen((prev) => !prev);
   const closePopup = () => setPopupOpen(false);
-  
-  return (
-    screen === currentScreen ? <div>
+
+  return screen === currentScreen ? (
+    <div>
       {!isAuth ? (
         <div className={b("block_login_client")} onClick={openModal}></div>
       ) : (
@@ -65,7 +77,7 @@ const BlockLoginClient: React.FC<BlockLoginClientProps> = ({ isAuth, screen }) =
 
       <Portal>
         <Modal isOpen={isModalOpen} onClose={closeModal}>
-          <ModalAuthFlow chatId={chatId || ""}/>
+          <ModalAuthFlow chatId={chatId || ""} />
         </Modal>
       </Portal>
 
@@ -75,8 +87,8 @@ const BlockLoginClient: React.FC<BlockLoginClientProps> = ({ isAuth, screen }) =
           <p onClick={logout}>Выйти</p>
         </div>
       </Popup>
-    </div> : null
-  );
+    </div>
+  ) : null;
 };
 
 export default BlockLoginClient;
