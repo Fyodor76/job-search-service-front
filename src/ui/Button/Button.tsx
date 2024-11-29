@@ -38,7 +38,12 @@ const Button: React.FC<ButtonProps> = ({
       type={type}
     >
       {loading ? (
-        <Loader position="static" width="28px" height="28px" />
+        <Loader
+          position="static"
+          width="28px"
+          height="28px"
+          isLoading={loading}
+        />
       ) : (
         children || "Button"
       )}

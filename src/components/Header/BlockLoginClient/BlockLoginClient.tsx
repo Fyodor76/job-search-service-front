@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import block from "bem-cn-lite";
+import { useRouter } from "next/navigation";
 
 const b = block("header");
 
@@ -12,6 +13,8 @@ import Portal from "@/components/Portal/Portal";
 import { useSearchParams } from "next/navigation";
 import useScreenSize from "@/hooks/useScreenSize";
 import ModalAuthFlow from "@/app/(main-page)/components/Modals/ModalAuthFlow/ModalAuthFlow";
+import { delay } from "@/helpers/delay";
+import { hideGlobalLoader, showGlobalLoader } from "@/helpers/emitLoader";
 
 interface BlockLoginClientProps {
   isAuth: boolean;
@@ -42,6 +45,7 @@ const BlockLoginClient: React.FC<BlockLoginClientProps> = ({
   const chatId = searchParams.get("chatId");
   const isRendered = currentScreen === screen;
   const isFirstRender = useRef(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (currentScreen) {
@@ -56,9 +60,15 @@ const BlockLoginClient: React.FC<BlockLoginClientProps> = ({
   const logout = async () => {
     try {
       await AuthServices.logout();
-      window.location.reload();
+      showGlobalLoader();
+      await delay(1000);
+      closePopup();
+      router.push("/");
+      router.refresh();
     } catch (e) {
       console.log(e);
+    } finally {
+      hideGlobalLoader();
     }
   };
 

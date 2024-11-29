@@ -134,6 +134,35 @@ h6 {
   font-size: calc(0.9rem + 0.3vw);
 }
 
+.Toastify__toast-body {
+  div {
+    font-family: "Raleway", sans-serif;
+    color: $color-text !important;
+  }
+}
+
+.Toastify__close-button {
+  color: $color-text !important;
+
+  svg {
+    fill: black !important;
+  }
+}
+
+.Toastify__toast--success {
+  .Toastify__progress-bar--success {
+    background-color: rgb(206, 242, 103) !important;
+    font-weight: 400;
+    font-family: "Raleway", sans-serif;
+  }
+
+  .Toastify__toast-icon {
+    svg {
+      fill: rgb(206, 242, 103) !important;
+    }
+  }
+}
+
 @font-face {
   font-family: "Raleway";
   src: url("/fonts/Raleway-Regular.woff2") format("woff2");

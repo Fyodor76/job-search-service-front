@@ -19,6 +19,9 @@ interface InputFieldWithFormProps {
   id?: string;
   maxLength?: number;
   error?: string;
+  onPaste?: (
+    e: React.ClipboardEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
 }
 
 const InputFieldWithForm: React.FC<InputFieldWithFormProps> = ({
@@ -38,6 +41,7 @@ const InputFieldWithForm: React.FC<InputFieldWithFormProps> = ({
   id,
   maxLength,
   error,
+  onPaste,
 }) => {
   const { field, fieldState } = useController({
     name,
@@ -78,6 +82,7 @@ const InputFieldWithForm: React.FC<InputFieldWithFormProps> = ({
               "input--full-width": isFullWidth,
             })}
             disabled={disabled}
+            onPaste={onPaste}
           />
         ) : (
           <input
@@ -100,6 +105,7 @@ const InputFieldWithForm: React.FC<InputFieldWithFormProps> = ({
               "input--full-width": isFullWidth,
             })}
             disabled={disabled}
+            onPaste={onPaste}
           />
         )}
         {icon && field.value && <span className="input-icon">{icon}</span>}

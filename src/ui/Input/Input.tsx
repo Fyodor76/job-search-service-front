@@ -12,14 +12,17 @@ interface InputProps {
   error?: string;
   className?: string;
   isFullWidth?: boolean;
-  name: string; 
+  name: string;
   required?: boolean;
   icon?: React.ReactNode;
-  control?: Control<any>; 
+  control?: Control<any>;
   rules?: object;
-  onChange?: (value: string) => void; 
+  onChange?: (value: string) => void;
   value?: string;
   maxLength?: number;
+  onPaste?: (
+    e: React.ClipboardEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -38,6 +41,7 @@ const Input: React.FC<InputProps> = ({
   error,
   value,
   maxLength,
+  onPaste,
 }) => {
   const isControlled = Boolean(control);
 
@@ -59,6 +63,7 @@ const Input: React.FC<InputProps> = ({
         value,
         maxLength,
         error,
+        onPaste,
       }}
     />
   ) : (
@@ -77,7 +82,10 @@ const Input: React.FC<InputProps> = ({
         value,
         maxLength,
         error,
+        onPaste,
       }}
     />
   );
 };
+
+export default Input;

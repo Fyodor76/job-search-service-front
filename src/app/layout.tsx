@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 import "../styles/globals.scss";
 import block from "bem-cn-lite";
-import Script from "next/script";
-
+import { Toast } from "@/components/Toast/Toast";
+import Loader from "@/components/Loader/Loader";
 const b = block("main");
 
 export const metadata: Metadata = {
@@ -19,6 +19,8 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div className={b()}>{children}</div>
+        <Toast/>
+        <Loader/>
       </body>
     </html>
   );

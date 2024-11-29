@@ -7,7 +7,8 @@ import { ArrowLeftIcon } from "@/svg/ArrowLeftIcon";
 import InputField from "@/ui/Input/InputField";
 import Portal from "@/components/Portal/Portal";
 import { AuthServices } from "@/services/auth";
-import { useRouter } from 'next/navigation';
+import { emitToast } from "@/helpers/emitToast";
+import { delay } from "@/helpers/delay";
 const b = block("code-verification-template");
 
 interface CodeVerificationTemplateProps {
@@ -22,8 +23,8 @@ interface FormData {
 
 const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
   onBack,
-  email = '',
-  chatId = ''
+  email = "",
+  chatId = "",
 }) => {
   const { control, handleSubmit, setValue, watch } = useForm<FormData>({
     defaultValues: {
@@ -34,7 +35,6 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
   const [resendTimer, setResendTimer] = useState<number | null>(null);
   const [isLoading, setLoading] = useState<boolean>(false);
   const codeValues = watch("code");
-  const router = useRouter()
 
   useEffect(() => {
     const savedTime = localStorage.getItem("resendTime");
@@ -92,27 +92,57 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
       }
 
       if (currentInput) {
-        currentInput.blur()
+        currentInput.blur();
       }
     }
   };
 
   const handleFormSubmit = async () => {
-    console.log(chatId, 'chatId')
+    console.log(chatId, "chatId");
     try {
       setLoading(true);
       const otp = codeValues.join("");
       if (otp.length === 6) {
-        const res = await AuthServices.verifyOtp({email, chatId, otp});
+        const res = await AuthServices.verifyOtp({ email, chatId, otp });
         console.log(res, "Verification successful");
-        router.push('/')
-        router.refresh()
+
+        emitToast(
+          "Авторизация успешно завершена!",
+          "success",
+          40000,
+          "bottom-right",
+        );
+
+        await delay(40000);
+        window.location.reload();
       }
     } catch (error) {
       console.error("Verification failed", error);
+      emitToast(
+        "Произошла ошибка авторизации",
+        "success",
+        2000,
+        "bottom-right",
+      );
     } finally {
       setLoading(false);
     }
+  };
+
+  const handlePaste = (index: number, event: React.ClipboardEvent) => {
+    const pastedData = event.clipboardData.getData("Text");
+    if (!/^\d{6}$/.test(pastedData)) {
+      emitToast(
+        "Произошла ошибка при вставке кода",
+        "error",
+        2000,
+        "bottom-right",
+      );
+      return;
+    }
+
+    const updatedValues = pastedData.split("");
+    setValue("code", updatedValues);
   };
 
   const sendEmail = async () => {
@@ -120,9 +150,20 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
       setLoading(true);
       const res = await AuthServices.sendEmail(email);
       resendCode();
+      emitToast(
+        "Новый код для авторизации отправлен Вам на почту!",
+        "success",
+        2000,
+        "bottom-right",
+      );
       console.log(res, "send email again");
     } catch (e) {
-      console.log(e);
+      emitToast(
+        "Произошла ошибка при отправке нового кода",
+        "error",
+        2000,
+        "bottom-right",
+      );
     } finally {
       setLoading(false);
     }
@@ -153,6 +194,7 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
                     size="medium"
                     maxLength={1}
                     value={field.value || ""}
+                    onPaste={(e) => handlePaste(index, e)}
                     onChange={(value: string) =>
                       handleInputChange(index, value)
                     }
@@ -167,6 +209,7 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
           <Button
             isFullWidth
             loading={isLoading}
+            disabled={isLoading}
             className={b("button")}
             type="submit"
           >

@@ -16,6 +16,9 @@ interface InputFieldProps {
   maxLength?: number;
   id?: string;
   error?: string;
+  onPaste?: (
+    e: React.ClipboardEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void; // Добавляем onPaste
 }
 
 const InputField = forwardRef<
@@ -38,6 +41,7 @@ const InputField = forwardRef<
       value,
       maxLength,
       error,
+      onPaste, // Пробрасываем onPaste
     },
     ref,
   ) => {
@@ -61,6 +65,7 @@ const InputField = forwardRef<
               placeholder={placeholder}
               value={value}
               onChange={handleChange}
+              onPaste={onPaste} // Добавляем обработчик onPaste
               name={name}
               id={id}
               required={required}
@@ -82,6 +87,7 @@ const InputField = forwardRef<
               placeholder={placeholder}
               value={value}
               onChange={handleChange}
+              onPaste={onPaste} // Добавляем обработчик onPaste
               name={name}
               id={id}
               required={required}
