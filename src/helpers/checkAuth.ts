@@ -14,16 +14,15 @@ export async function checkAuth() {
     refreshTokenHeader || cookiesHeader.get("refreshToken")?.value;
 
   let isAuth = false;
-  let userData = null;
+  let authData = null;
 
   try {
     if (accessToken) {
       const secret = new TextEncoder().encode(process.env.JWT_SECRET);
       const { payload } = await jwtVerify(accessToken, secret);
       isAuth = true;
-      userData = payload;
+      authData = payload;
     }
   } catch (error) {}
-
-  return { isAuth, userData };
+  return { isAuth, authData };
 }

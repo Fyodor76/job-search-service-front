@@ -10,8 +10,8 @@ import { AuthServices } from "@/services/auth";
 import { emitToast } from "@/helpers/emitToast";
 import { delay } from "@/helpers/delay";
 import { AnimatePresence, motion } from "framer-motion";
-import useCountdown from "@/hooks/useCountdown";
 import CodeVerificationSuccessScreen from "./CodeVerificationSuccessScreen";
+import { useRouter } from "next/navigation";
 const b = block("code-verification-template");
 
 interface CodeVerificationTemplateProps {
@@ -39,6 +39,7 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isVerified, setVerified] = useState<boolean>(false);
   const codeValues = watch("code");
+  const router = useRouter();
 
   useEffect(() => {
     const savedTime = localStorage.getItem("resendTime");
@@ -113,14 +114,16 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
         setVerified(true);
 
         await delay(3000);
-        window.location.reload();
+
+        const baseUrl = window.location.origin + window.location.pathname;
+
+        window.location.replace(baseUrl);
       }
     } catch (error) {
       console.error("Verification failed", error);
       emitToast("Произошла ошибка авторизации", "error", 2000, "top-right");
     } finally {
       setLoading(false);
-      // hideGlobalLoader();
     }
   };
 

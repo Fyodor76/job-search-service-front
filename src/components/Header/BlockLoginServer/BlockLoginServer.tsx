@@ -5,12 +5,18 @@ import { emojiList } from "@/const/emojiList";
 const b = block("header");
 interface BlockLoginServerProps {
   isAuth: boolean;
+  randomIndexPicture?: number;
 }
 
-const BlockLoginServer: React.FC<BlockLoginServerProps> = ({ isAuth }) => {
-  const randomEmoji = isAuth
-    ? emojiList[Math.floor(Math.random() * emojiList.length)]
-    : null;
+const BlockLoginServer: React.FC<BlockLoginServerProps> = ({
+  isAuth,
+  randomIndexPicture,
+}) => {
+  // const randomEmoji = isAuth
+  //   ? emojiList[Math.floor(Math.random() * emojiList.length)]
+  //   : null;
+
+  const randomEmoji = emojiList[randomIndexPicture || 0];
 
   return (
     <div className={b("block_login_server")}>

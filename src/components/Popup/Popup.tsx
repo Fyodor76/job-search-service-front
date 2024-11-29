@@ -5,9 +5,15 @@ interface PopupProps {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
+  showCloseIcon?: boolean;
 }
 
-const Popup: React.FC<PopupProps> = ({ isOpen, onClose, children }) => {
+const Popup: React.FC<PopupProps> = ({
+  isOpen,
+  onClose,
+  children,
+  showCloseIcon = false,
+}) => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -59,13 +65,12 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose, children }) => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <motion.div
-            className="popup-content"
-            // Здесь уже не нужно ловить событие клика
-          >
-            <button className="popup-close-btn" onClick={onClose}>
-              &times;
-            </button>
+          <motion.div className="popup-content">
+            {showCloseIcon && (
+              <button className="popup-close-btn" onClick={onClose}>
+                &times;
+              </button>
+            )}
             {children}
           </motion.div>
         </motion.div>
