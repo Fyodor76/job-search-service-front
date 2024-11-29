@@ -66,6 +66,10 @@
   @media (max-width: 1023px) {
     .main-screen__image-container {
       height: 60% !important;
+
+      svg {
+        width: 50% !important;
+      }
     }
   }
 
@@ -83,7 +87,7 @@
         height: 55%;
         .responsive-svg svg {
           height: 70%;
-          width: 95%;
+          width: 95% !important;
         }
       }
     }

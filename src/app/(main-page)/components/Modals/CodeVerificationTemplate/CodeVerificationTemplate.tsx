@@ -9,6 +9,9 @@ import Portal from "@/components/Portal/Portal";
 import { AuthServices } from "@/services/auth";
 import { emitToast } from "@/helpers/emitToast";
 import { delay } from "@/helpers/delay";
+import { AnimatePresence, motion } from "framer-motion";
+import useCountdown from "@/hooks/useCountdown";
+import CodeVerificationSuccessScreen from "./CodeVerificationSuccessScreen";
 const b = block("code-verification-template");
 
 interface CodeVerificationTemplateProps {
@@ -34,6 +37,7 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
 
   const [resendTimer, setResendTimer] = useState<number | null>(null);
   const [isLoading, setLoading] = useState<boolean>(false);
+  const [isVerified, setVerified] = useState<boolean>(false);
   const codeValues = watch("code");
 
   useEffect(() => {
@@ -106,26 +110,17 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
         const res = await AuthServices.verifyOtp({ email, chatId, otp });
         console.log(res, "Verification successful");
 
-        emitToast(
-          "Авторизация успешно завершена!",
-          "success",
-          40000,
-          "bottom-right",
-        );
+        setVerified(true);
 
-        await delay(40000);
+        await delay(3000);
         window.location.reload();
       }
     } catch (error) {
       console.error("Verification failed", error);
-      emitToast(
-        "Произошла ошибка авторизации",
-        "success",
-        2000,
-        "bottom-right",
-      );
+      emitToast("Произошла ошибка авторизации", "error", 2000, "top-right");
     } finally {
       setLoading(false);
+      // hideGlobalLoader();
     }
   };
 
@@ -170,70 +165,111 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
   };
 
   return (
-    <div className={b()}>
-      <Portal containerSelector=".modal-content">
-        <div className={b("icon-back")} onClick={onBack}>
-          <ArrowLeftIcon />
-          <span className={b("icon-text-back")}>Назад</span>
-        </div>
-      </Portal>
-      <div className={b("block-form")}>
-        <h5 className={b("title")}>Введите код</h5>
-        <p className={b("subtitle")}>Мы отправили вам на почту код для входа</p>
-        <form onSubmit={handleSubmit(handleFormSubmit)} className={b("form")}>
-          <div className={b("inputs")}>
-            {Array.from({ length: 6 }).map((_, index) => (
-              <Controller
-                key={index}
-                name={`code.${index}` as const}
-                control={control}
-                render={({ field }) => (
-                  <InputField
-                    {...field}
-                    type="text"
-                    size="medium"
-                    maxLength={1}
-                    value={field.value || ""}
-                    onPaste={(e) => handlePaste(index, e)}
-                    onChange={(value: string) =>
-                      handleInputChange(index, value)
-                    }
-                    className={b("inputs-input")}
-                    id={`code-input-${index}`}
-                    placeholder="0"
-                  />
-                )}
-              />
-            ))}
+    <AnimatePresence mode="wait" initial={false}>
+      {!isVerified ? (
+        <motion.div
+          key="form-screen"
+          style={{ height: "100%" }}
+          initial={{ opacity: 0, x: 200 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -200 }}
+          transition={{
+            duration: 0.5,
+            ease: "easeInOut",
+          }}
+        >
+          <div className={b()}>
+            <Portal containerSelector=".modal-content">
+              <div className={b("icon-back")} onClick={onBack}>
+                <ArrowLeftIcon />
+                <span className={b("icon-text-back")}>Назад</span>
+              </div>
+            </Portal>
+            <div className={b("block-form")}>
+              <h5 className={b("title")}>Введите код</h5>
+              <p className={b("subtitle")}>
+                Мы отправили вам на почту код для входа
+              </p>
+              <form
+                onSubmit={handleSubmit(handleFormSubmit)}
+                className={b("form")}
+              >
+                <div className={b("inputs")}>
+                  {Array.from({ length: 6 }).map((_, index) => (
+                    <Controller
+                      key={index}
+                      name={`code.${index}` as const}
+                      control={control}
+                      render={({ field }) => (
+                        <InputField
+                          {...field}
+                          type="text"
+                          size="medium"
+                          maxLength={1}
+                          value={field.value || ""}
+                          onPaste={(e) => handlePaste(index, e)}
+                          onChange={(value: string) =>
+                            handleInputChange(index, value)
+                          }
+                          className={b("inputs-input")}
+                          id={`code-input-${index}`}
+                          placeholder="0"
+                        />
+                      )}
+                    />
+                  ))}
+                </div>
+                <Button
+                  isFullWidth
+                  loading={isLoading}
+                  disabled={isLoading}
+                  className={b("button")}
+                  type="submit"
+                >
+                  Подтвердить
+                </Button>
+              </form>
+            </div>
+            <p className={b("resend-info")}>
+              {!resendTimer ? (
+                <span className={b("resend-info-link")}>
+                  Не получили код?{" "}
+                  <span
+                    className={b("resend-info-link-click")}
+                    onClick={sendEmail}
+                  >
+                    Нажмите здесь
+                  </span>
+                </span>
+              ) : (
+                <>
+                  <span>Новый код отправлен :) </span>
+                  <br />
+                  <span>
+                    {" "}
+                    Повторить попытку можно через {resendTimer} секунд
+                  </span>
+                </>
+              )}
+            </p>
           </div>
-          <Button
-            isFullWidth
-            loading={isLoading}
-            disabled={isLoading}
-            className={b("button")}
-            type="submit"
-          >
-            Подтвердить
-          </Button>
-        </form>
-      </div>
-      <p className={b("resend-info")}>
-        {!resendTimer ? (
-          <span className={b("resend-info-link")}>
-            Не получили код?{" "}
-            <span className={b("resend-info-link-click")} onClick={sendEmail}>
-              Нажмите здесь
-            </span>
-          </span>
-        ) : (
-          <>
-            <span>Новый код отправлен :) </span>
-            <br />
-            <span> Повторить попытку можно через {resendTimer} секунд</span>
-          </>
-        )}
-      </p>
-    </div>
+        </motion.div>
+      ) : (
+        <motion.div
+          key="success-screen"
+          className={b("success-screen-container")}
+          initial={{ opacity: 0, x: -200 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 200 }}
+          transition={{
+            duration: 0.5,
+            ease: "easeInOut",
+          }}
+        >
+          <CodeVerificationSuccessScreen />
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

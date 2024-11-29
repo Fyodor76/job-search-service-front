@@ -70,7 +70,7 @@ const Loader: React.FC<LoaderProps> = ({
       event: CustomEvent<{ isLoading: boolean; isGlobal: boolean }>,
     ) => {
       setLoading(event.detail.isLoading);
-      setIsGlobal(event.detail.isGlobal); // Обновляем флаг глобального лоадера
+      setIsGlobal(event.detail.isGlobal);
     };
 
     window.addEventListener("app-loader", handleLoaderEvent as EventListener);
@@ -83,21 +83,15 @@ const Loader: React.FC<LoaderProps> = ({
     };
   }, []);
 
-  if (!loading) return null; // Не показываем лоадер, если isLoading равно false
-
+  if (!loading) return null;
   return isGlobal ? (
-    <div
-      className={`loader-wrapper ${isGlobal ? "global-loader" : ""}`} // Добавляем класс для глобального лоадера
-    >
-      <span
-        className="loader"
-        style={{ width, height, ...style }} // Используем ваши стили для лоадера
-      />
+    <div className={`loader-wrapper ${isGlobal ? "global-loader" : ""}`}>
+      <span className="loader" style={{ width, height, ...style }} />
     </div>
   ) : (
     <span
       className="loader"
-      style={{ width, height, position: "static", ...style }} // Используем ваши стили для лоадера
+      style={{ width, height, position: "static", ...style }}
     />
   );
 };
