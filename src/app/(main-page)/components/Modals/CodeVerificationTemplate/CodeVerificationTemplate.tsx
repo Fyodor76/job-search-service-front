@@ -127,7 +127,9 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
     }
   };
 
-  const handlePaste = (index: number, event: React.ClipboardEvent) => {
+  const handlePaste = (index: number, event: React.ClipboardEvent<HTMLInputElement>) => {
+    event.preventDefault();  
+  
     const pastedData = event.clipboardData.getData("Text");
     if (!/^\d{6}$/.test(pastedData)) {
       emitToast(
@@ -138,11 +140,16 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
       );
       return;
     }
-
+  
     const updatedValues = pastedData.split("");
     setValue("code", updatedValues);
+  
+    const nextInput = document.getElementById(`code-input-${index}`) as HTMLInputElement | null;
+    if (nextInput) {
+      nextInput.focus();
+    }
   };
-
+  
   const sendEmail = async () => {
     try {
       setLoading(true);
