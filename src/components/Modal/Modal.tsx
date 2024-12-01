@@ -6,9 +6,15 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
+  isCrossIconShown?: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  children,
+  isCrossIconShown = true,
+}) => {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -50,11 +56,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         >
           <motion.div
             className="modal-content"
-            onClick={(e) => e.stopPropagation()}  
+            onClick={(e) => e.stopPropagation()}
           >
-            <button className="modal-close-btn" onClick={handleClose}>
-              <CrossIcon />
-            </button>
+            {isCrossIconShown && (
+              <button className="modal-close-btn" onClick={handleClose}>
+                <CrossIcon />
+              </button>
+            )}
             {children}
           </motion.div>
         </motion.div>

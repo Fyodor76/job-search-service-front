@@ -3,6 +3,7 @@ import "../styles/globals.scss";
 import block from "bem-cn-lite";
 import { Toast } from "@/components/Toast/Toast";
 import Loader from "@/components/Loader/Loader";
+import { CookiesTemplate } from "@/tepmplates/cookies/CookiesTemplate";
 const b = block("main");
 
 export const metadata: Metadata = {
@@ -19,8 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div className={b()}>{children}</div>
-        <Toast/>
-        <Loader/>
+        <Toast />
+        <Loader />
+        <CookiesTemplate />
       </body>
     </html>
   );
