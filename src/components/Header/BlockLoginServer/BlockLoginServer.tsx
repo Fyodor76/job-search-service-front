@@ -12,10 +12,6 @@ const BlockLoginServer: React.FC<BlockLoginServerProps> = ({
   isAuth,
   randomIndexPicture,
 }) => {
-  // const randomEmoji = isAuth
-  //   ? emojiList[Math.floor(Math.random() * emojiList.length)]
-  //   : null;
-
   const randomEmoji = emojiList[randomIndexPicture || 0];
 
   return (

@@ -127,8 +127,11 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
     }
   };
 
-  const handlePaste = (index: number, event: React.ClipboardEvent<HTMLInputElement>) => {
-    event.preventDefault();  
+  const handlePaste = (
+    index: number, 
+    event: React.ClipboardEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    event.preventDefault();
   
     const pastedData = event.clipboardData.getData("Text");
     if (!/^\d{6}$/.test(pastedData)) {
@@ -136,7 +139,7 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
         "Произошла ошибка при вставке кода",
         "error",
         2000,
-        "bottom-right",
+        "bottom-right"
       );
       return;
     }
@@ -144,7 +147,10 @@ const CodeVerificationTemplate: React.FC<CodeVerificationTemplateProps> = ({
     const updatedValues = pastedData.split("");
     setValue("code", updatedValues);
   
-    const nextInput = document.getElementById(`code-input-${index}`) as HTMLInputElement | null;
+    const nextInput = document.getElementById(
+      `code-input-${index}`
+    ) as HTMLInputElement | null;
+  
     if (nextInput) {
       nextInput.focus();
     }

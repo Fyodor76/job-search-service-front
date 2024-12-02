@@ -2,7 +2,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import Portal from "@/components/Portal/Portal";
-import "./CookiesTemplate.scss";
 import Button from "@/ui/Button/Button";
 import Link from "next/link";
 

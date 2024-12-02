@@ -19,7 +19,7 @@ import { emojiList } from "@/const/emojiList";
 import { truncateText } from "@/helpers/truncateText";
 import { AuthData } from "@/types/AuthUserData";
 import { Tooltip } from "react-tooltip";
-import ReactTooltip from "react-tooltip";
+
 interface BlockLoginClientProps {
   isAuth: boolean;
   screen: string;
