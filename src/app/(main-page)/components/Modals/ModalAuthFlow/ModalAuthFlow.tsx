@@ -54,7 +54,7 @@ const ModalAuthFlow: React.FC<ModalAuthFlowProps> = ({chatId}) => {
             height: "100%",
           }}
         >
-          {!codeScreen.isCodeScreen ? (
+          {codeScreen.isCodeScreen ? (
             <CodeVerificationTemplate
               onBack={setEmailScreenHandler}
               email={codeScreen.email}
